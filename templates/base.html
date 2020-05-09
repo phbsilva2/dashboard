@@ -1,16 +1,27 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale = 1, shrink-to-fit=no">
         <title>Título Sistema</title>
-        <!-- CSS Bootstrap -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+        {% block stylesheets %}
+            {% include '_styles.html' %}
+        {% endblock %}
+
     </head>
     <body>
+
+        {% block nav_sidebar %}
+            {% include '_nav_sidebar.html' %}
+        {% endblock %}
+
         {% block body %}
-        {% endblock body %}
-        <!-- JavaScript Bootstrap -->
-        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        {% endblock %}
+
+        {% block javascript %}
+            {% include '_scripts.html' %}
+        {% endblock %}
+
     </body>
 </html>

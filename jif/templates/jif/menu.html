@@ -1,0 +1,61 @@
+{% extends '_nav_sidebar.html' %}
+{% block nav_links %}
+	<li class="nav-item" data-toggle="tooltip" data-placement="right">
+		<a class="nav-link" href="#">
+			<i class="fa fa-fw fa-table"></i>
+			<span class="nav-link-text">Link 1o Nível</span>
+		</a>
+	</li>
+	<li class="nav-item" data-toggle="tooltip" data-placement="right">
+		<a class="nav-link nav-link-collapse collapse" href="#links2nivel"
+		data-toggle="collapse" data-parent="#linksaccordion">
+			<i class="fa fa-fw fa-wrench"></i>
+			<span class="nav-link-text">Links 2o Nível</span>
+		</a>
+		<ul class="sidenav-second-level collapse" id="links2nivel">
+			<li>
+				<a href="#">Menu 2.1</a>
+			</li>
+			<li>
+				<a href="#">Menu 2.2</a>
+			</li>
+			<li>
+				<a href="#">Menu 2.3</a>
+			</li>
+			<li>
+				<a href="#link3nivel" class="nav-link-collapse collapse"
+				data-toggle="collapse">Links 3o Nível</a>
+				<ul class="sidenav-third-level collapse" id="link3nivel">
+					<li>
+						<a href="#">Link 3.1</a>
+					</li>
+					<li>
+						<a href="#">Link 3.2</a>
+					</li>
+					<li>
+						<a href="#">Link 3.3</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-item" data-toggle="tooltip" data-placement="right">
+		<a class="nav-link nav-link-collapse collapse" href="#linksexemplo"
+		data-toggle="collapse" data-parent="#linksaccordion">
+			<i class="fa fa-fw fa-file"></i>
+			<span class="nav-link-text">Páginas</span>
+		</a>
+		<ul class="sidenav-second-level collapse" id="linksexemplo">
+			<li>
+				<a href="#">Página A</a>
+			</li>
+			<li>
+				<a href="#">Página B</a>
+			</li>
+			<li>
+				<a href="#">Página C</a>
+			</li>
+		</ul>
+	</li>
+
+{% endblock %}
