@@ -128,3 +128,6 @@ STATICFILES_DIRS = [
 
 # Arquivos estátivos para ambiente de produção (DEBUG=False)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
