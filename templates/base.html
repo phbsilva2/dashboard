@@ -10,18 +10,21 @@
         {% endblock %}
 
     </head>
-    <body>
+    <body class="bg-dark fixed-nav">
+    {% block body %}
 
         {% block nav_sidebar %}
             {% include '_nav_sidebar.html' %}
         {% endblock %}
 
-        {% block body %}
+        {% block content_wrapper %}
+            {% include '_content.html' %}
         {% endblock %}
 
         {% block javascript %}
             {% include '_scripts.html' %}
         {% endblock %}
 
+    {% endblock %}
     </body>
 </html>
