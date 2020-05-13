@@ -18,8 +18,49 @@
         {% endblock %}
 
         {% block content_wrapper %}
-            {% include '_content.html' %}
-        {% endblock %}
+            <div class="content-wrapper">
+                {% block content_header %}
+                    <section class="content-header">
+                        {% block no_heading %}
+                            <h1>
+                                {% block page_name %}
+                                {% endblock %}
+                                <div class="header-actions">
+                                    {% block page_actions %}
+                                    {% endblock %}
+                                </div>
+                                {% block no_description %}
+                                <small>
+                                    {% block page_description %}
+                                    {% endblock %}
+                                </small>
+                                {% endblock %}
+                            </h1>
+                            {% block breadcrumbs %}
+                                {# Breadcrumb implementation left to developers #}
+                            {% endblock %}
+                        {% endblock no_heading %}
+                    </section>
+                {% endblock %}
+
+                {% block content_outer %}
+                <section class="content">
+                    <div class="container-fluid">
+                    {% block messages %}
+                        {% include '_messages.html' %}
+                    {% endblock %}
+
+                    {% block content_block_wrap %}
+                        {% block content %}
+                            {% include '_content.html' %}
+                        {% endblock %}
+                    {% endblock %}
+                    </div>
+                </section>
+                {% endblock %}
+
+            </div>
+            {% endblock content_wrapper %}
 
         {% block nav_footer %}
             {% include '_footer.html' %}

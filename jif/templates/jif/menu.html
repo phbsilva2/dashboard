@@ -7,18 +7,18 @@
 		</a>
 	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link nav-link-collapse collapse" href="#links2nivel"
+		<a class="nav-link nav-link-collapse collapse" href="#cadastro"
 		data-toggle="collapse" data-parent="#linksaccordion">
 			<i class="fa fa-fw fa-wrench"></i>
-			<span class="nav-link-text">Links 2o Nível</span>
+			<span class="nav-link-text">Cadastros</span>
 		</a>
-		<ul class="sidenav-second-level collapse" id="links2nivel">
-			<li>
-				<a href="#">Menu 2.1</a>
-			</li>
-			<li>
-				<a href="#">Menu 2.2</a>
-			</li>
+		<ul class="sidenav-second-level collapse" id="cadastro">
+			{% if perms.jif.view_unidadeorganizacional %}
+			<li><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacional</a></li>
+			{% endif %}
+			{% if perms.jif.view_tipomodalidade %}
+			<li><a href="{% url 'tipo_modalidade_list' %}">Tipo de Modalidade</a></li>
+			{% endif %}
 			<li>
 				<a href="#">Menu 2.3</a>
 			</li>
@@ -57,5 +57,4 @@
 			</li>
 		</ul>
 	</li>
-
 {% endblock %}
