@@ -8,19 +8,19 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item active">Unidade Organizacial</li>
+        <li class="breadcrumb-item active">{{unidade_organizacional.get_verbose_name}}</li>
     </ol>
 {% endblock %}
 
 {% block content %}
     <div class="card mb-3">
         <div class="card-header">
-            Unidades Organizacionais
+            {{unidade_organizacional.get_verbose_name_plural}}
             <div class="box-tools pull-right">
                 {% if perms.jif.add_unidadeorganizacional %}
                 <a href="/unidadeorganizacional_create/" class="btn btn-primary btn-sm">
                     <i class="fa fa-plus"></i>
-                    Adicionar Unidade Organizacional
+                    Adicionar {{unidade_organizacional.get_verbose_name}}
                 </a>
                 {% endif %}
             </div>

@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacial</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional_list' %}">{{unidade_organizacional.get_verbose_name}}</a></li>
         <li class="breadcrumb-item active">Visualizar</li>
     </ol>
 {% endblock %}
@@ -16,7 +16,7 @@
 {% block content %}
     <div class="card mb-3">
         <div class="card-header">
-            Visualizar Unidade Organizacional
+            Visualizar {{unidade_organizacional.get_verbose_name}}
         </div>
          <div class="card-body">
             <table class="table table-bordered">

@@ -6,22 +6,24 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render
 
-from jif.models.unidade_organizacional_models import UnidadeOrganizacional
+from jif.models import UnidadeOrganizacional
 
 
 class UnidadeOrganizacionalView(View):
 
     def get(self, request, *args, **kwargs):
         unidadades_organizacionais = UnidadeOrganizacional.objects.all().order_by('nome')
+        unidade_organizacional = UnidadeOrganizacional
         context = {
-            'unidadades_organizacionais': unidadades_organizacionais
+            'unidadades_organizacionais': unidadades_organizacionais,
+            'unidade_organizacional': unidade_organizacional
         }
         return render(request, 'jif/unidade_organizacional/list.html', context)
 
 
 class UnidadeOrganizacionalDetailView(PermissionRequiredMixin, DetailView):
     model = UnidadeOrganizacional
-    permission_required = 'core.view_unidadeorganizacional'
+    permission_required = 'jif.view_unidadeorganizacional'
     template_name = 'jif/unidade_organizacional/detail.html'
     context_object_name = 'unidade_organizacional'
 
@@ -29,29 +31,29 @@ class UnidadeOrganizacionalDetailView(PermissionRequiredMixin, DetailView):
 class UnidadeOrganizacionalCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = UnidadeOrganizacional
     fields = ["nome"]
-    permission_required = 'core.add_unidadeorganizacional'
+    permission_required = 'jif.add_unidadeorganizacional'
     template_name = 'jif/unidade_organizacional/form.html'
-    success_message = "A Unidade Organizacional '%(nome)s' foi adicionada com sucesso!"
+    success_message = "'%(nome)s' foi adicionado com sucesso!"
     success_url = "/unidadeorganizacional_create"
 
 
 class UnidadeOrganizacionalUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = UnidadeOrganizacional
     fields = ["nome"]
-    permission_required = 'core.change_unidadeorganizacional'
+    permission_required = 'jif.change_unidadeorganizacional'
     template_name = 'jif/unidade_organizacional/form.html'
     context_object_name = 'unidade_organizacional'
-    success_message = "A Unidade Organizacional '%(nome)s' foi alterada com sucesso!"
+    success_message = "'%(nome)s' foi alterado com sucesso!"
     success_url = "/unidadeorganizacional"
 
 
 class UnidadeOrganizacionalDeleteView(PermissionRequiredMixin, DeleteView):
     model = UnidadeOrganizacional
-    permission_required = 'core.delete_unidadeorganizacional'
+    permission_required = 'jif.delete_unidadeorganizacional'
     template_name = 'jif/unidade_organizacional/confirm_delete.html'
     context_object_name = 'unidade_organizacional'
     success_url = "/unidadeorganizacional"
 
     def delete(self, request, *args, **kwargs):
-        messages.success(request, f"A Unidade Organizacional '{self.get_object()}' foi excluída com sucesso!")
+        messages.success(request, f"'{self.get_object()}' foi excluído com sucesso!")
         return super(UnidadeOrganizacionalDeleteView, self).delete(request, *args, **kwargs)

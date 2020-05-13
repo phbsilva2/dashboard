@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacial</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacional</a></li>
         {% if unidade_organizacional %}
         <li class="breadcrumb-item active">Editar</li>
         {% else %}
@@ -21,7 +21,7 @@
     <div class="card mb-3">
         <div class="card-header">
             {% if unidade_organizacional %}
-            Editar Unidade Organizacional
+            Editar {{unidade_organizacional.get_verbose_name}}
             {% else %}
             Adicionar Unidade Organizacional
             {% endif %}
@@ -29,7 +29,7 @@
         <div class="card-body">
             <form method="post">
                 {% if unidade_organizacional %}
-                <p>Você está editando "{{ unidade_organizacional.nome }}" </p>
+                <p>Você está editando '{{ unidade_organizacional.nome }}' </p>
                 {% endif %}
                 {% csrf_token %}
                 {{ form.as_p }}
