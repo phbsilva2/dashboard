@@ -1,19 +1,12 @@
-from django.views.generic import View, TemplateView
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render
 
-from .models import (
-    UnidadeOrganizacional,
-)
-
-
-class IndexView(LoginRequiredMixin, TemplateView):
-    login_url = '/accounts/login/'
-    template_name = 'jif/index.html'
+from jif.models.unidade_organizacional_models import UnidadeOrganizacional
 
 
 class UnidadeOrganizacionalView(View):
@@ -23,13 +16,13 @@ class UnidadeOrganizacionalView(View):
         context = {
             'unidadades_organizacionais': unidadades_organizacionais
         }
-        return render(request, 'jif/unidadeorganizacional_list.html', context)
+        return render(request, 'jif/unidade_organizacional/list.html', context)
 
 
 class UnidadeOrganizacionalDetailView(PermissionRequiredMixin, DetailView):
     model = UnidadeOrganizacional
     permission_required = 'core.view_unidadeorganizacional'
-    template_name = 'jif/unidadeorganizacional_detail.html'
+    template_name = 'jif/unidade_organizacional/detail.html'
     context_object_name = 'unidade_organizacional'
 
 
@@ -37,7 +30,7 @@ class UnidadeOrganizacionalCreateView(PermissionRequiredMixin, SuccessMessageMix
     model = UnidadeOrganizacional
     fields = ["nome"]
     permission_required = 'core.add_unidadeorganizacional'
-    template_name = 'jif/unidadeorganizacional_form.html'
+    template_name = 'jif/unidade_organizacional/form.html'
     success_message = "Unidade Organizacional adicionada com sucesso!"
     success_url = "/unidadeorganizacional"
 
@@ -46,7 +39,7 @@ class UnidadeOrganizacionalUpdateView(PermissionRequiredMixin, SuccessMessageMix
     model = UnidadeOrganizacional
     fields = ["nome"]
     permission_required = 'core.change_unidadeorganizacional'
-    template_name = 'jif/unidadeorganizacional_form.html'
+    template_name = 'jif/unidade_organizacional/form.html'
     context_object_name = 'unidade_organizacional'
     success_message = "Unidade Organizacional alterada com sucesso!"
     success_url = "/unidadeorganizacional"
@@ -55,7 +48,7 @@ class UnidadeOrganizacionalUpdateView(PermissionRequiredMixin, SuccessMessageMix
 class UnidadeOrganizacionalDeleteView(PermissionRequiredMixin, DeleteView):
     model = UnidadeOrganizacional
     permission_required = 'core.delete_unidadeorganizacional'
-    template_name = 'jif/unidadeorganizacional_confirm_delete.html'
+    template_name = 'jif/unidade_organizacional/confirm_delete.html'
     context_object_name = 'unidade_organizacional'
     success_url = "/unidadeorganizacional"
 
