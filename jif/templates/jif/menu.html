@@ -16,9 +16,9 @@
 			{% if perms.jif.view_unidadeorganizacional %}
 			<li><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacional</a></li>
 			{% endif %}
-			<li>
-				<a href="#">Menu 2.2</a>
-			</li>
+			{% if perms.jif.view_tipomodalidade %}
+			<li><a href="{% url 'tipo_modalidade_list' %}">Tipo de Modalidade</a></li>
+			{% endif %}
 			<li>
 				<a href="#">Menu 2.3</a>
 			</li>

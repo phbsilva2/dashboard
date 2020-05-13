@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item active">{{tipo_modalidade.get_verbose_name}}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            {{tipo_modalidade.get_verbose_name_plural}}
+            <div class="box-tools pull-right">
+                {% if perms.jif.add_tipomodalidade %}
+                <a href="/tipomodalidade_create/" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar {{tipo_modalidade.get_verbose_name}}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tm in tipos_modalidade %}
+                    <tr class="row1">
+                        <td style="width:70px">
+                            {% if perms.jif.view_tipomodalidade %}
+                            <a href="/tipomodalidade/{{tm.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.edit_tipomodalidade %}
+                            <a href="/tipomodalidade/{{tm.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.delete_tipomodalidade %}
+                            <a href="/tipomodalidade/{{tm.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{tm.titulo}}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
