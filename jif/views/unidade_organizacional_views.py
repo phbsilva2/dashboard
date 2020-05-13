@@ -31,8 +31,8 @@ class UnidadeOrganizacionalCreateView(PermissionRequiredMixin, SuccessMessageMix
     fields = ["nome"]
     permission_required = 'core.add_unidadeorganizacional'
     template_name = 'jif/unidade_organizacional/form.html'
-    success_message = "Unidade Organizacional adicionada com sucesso!"
-    success_url = "/unidadeorganizacional"
+    success_message = "A Unidade Organizacional '%(nome)s' foi adicionada com sucesso!"
+    success_url = "/unidadeorganizacional_create"
 
 
 class UnidadeOrganizacionalUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -41,7 +41,7 @@ class UnidadeOrganizacionalUpdateView(PermissionRequiredMixin, SuccessMessageMix
     permission_required = 'core.change_unidadeorganizacional'
     template_name = 'jif/unidade_organizacional/form.html'
     context_object_name = 'unidade_organizacional'
-    success_message = "Unidade Organizacional alterada com sucesso!"
+    success_message = "A Unidade Organizacional '%(nome)s' foi alterada com sucesso!"
     success_url = "/unidadeorganizacional"
 
 
@@ -53,5 +53,5 @@ class UnidadeOrganizacionalDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = "/unidadeorganizacional"
 
     def delete(self, request, *args, **kwargs):
-        messages.success(request, f"Unidade Organizacional {self.get_object()} excluída com sucesso!")
+        messages.success(request, f"A Unidade Organizacional '{self.get_object()}' foi excluída com sucesso!")
         return super(UnidadeOrganizacionalDeleteView, self).delete(request, *args, **kwargs)
