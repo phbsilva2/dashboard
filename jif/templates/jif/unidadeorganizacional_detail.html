@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional' %}">Unidade Organizacial</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacial</a></li>
         <li class="breadcrumb-item active">Visualizar</li>
     </ol>
 {% endblock %}
@@ -32,7 +32,7 @@
                 </tbody>
             </table>
              <div class="box-tools pull-left">
-                <a href="{% url 'unidade_organizacional' %}" class="btn btn-primary btn-sm"> Voltar </a>
+                <a href="{% url 'unidade_organizacional_list' %}" class="btn btn-primary btn-sm"> Voltar </a>
             </div>
          </div>
     </div>

@@ -1,9 +1,10 @@
-from django.views.generic import TemplateView
+from django.views.generic import View, TemplateView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+from django.shortcuts import render
 
 from .models import (
     UnidadeOrganizacional,
@@ -15,31 +16,14 @@ class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'jif/index.html'
 
 
-from django.shortcuts import render
-from django.core.paginator import Paginator
+class UnidadeOrganizacionalView(View):
 
-
-def unidadeOrganizacionalList(request):
-    search = request.GET.get('search')
-    unidadades_organizacionais = None
-
-    if search:
-        unidadades_organizacionais_list = UnidadeOrganizacional.objects.filter(nome__icontains=search).order_by('nome')
-    else:
-        unidadades_organizacionais_list = UnidadeOrganizacional.objects.all().order_by('nome')
-
-    if unidadades_organizacionais_list:
-
-        paginator = Paginator(unidadades_organizacionais_list, 10)
-
-        page = request.GET.get('page')
-        unidadades_organizacionais = paginator.get_page(page)
-
-    else:
-        messages.info(request, 'Nenhuma Unidade Organizacional localizada!')
-
-    return render(request, 'jif/unidadeorganizacional_list.html',
-                  {'unidadades_organizacionais': unidadades_organizacionais})
+    def get(self, request, *args, **kwargs):
+        unidadades_organizacionais = UnidadeOrganizacional.objects.all().order_by('nome')
+        context = {
+            'unidadades_organizacionais': unidadades_organizacionais
+        }
+        return render(request, 'jif/unidadeorganizacional_list.html', context)
 
 
 class UnidadeOrganizacionalDetailView(PermissionRequiredMixin, DetailView):

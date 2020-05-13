@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional' %}">Unidade Organizacial</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacial</a></li>
         <li class="breadcrumb-item active">Excluir</li>
     </ol>
 {% endblock %}
@@ -24,7 +24,7 @@
                 <p>Você tem certeza que deseja excluir "{{ unidade_organizacional.nome }}" ?</p>
                 <div class="box-tools pull-left">
                     <input type="submit" class="btn btn-danger btn-sm" value="Excluir">
-                    <a href="{% url 'unidade_organizacional' %}" class="btn btn-primary btn-sm">Cancelar</a>
+                    <a href="{% url 'unidade_organizacional_list' %}" class="btn btn-primary btn-sm">Cancelar</a>
                 </div>
             </form>
          </div>
