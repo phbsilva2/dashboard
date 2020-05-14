@@ -26,6 +26,14 @@ from jif.views.modalidade_views import (
     ModalidadeDeleteView
 )
 
+from jif.views.atleta_views import (
+    AtletaView,
+    AtletaCreateView,
+    AtletaDetailView,
+    AtletaUpdateView,
+    AtletaDeleteView
+)
+
 
 urlpatterns = [
     # Index URL
@@ -48,4 +56,10 @@ urlpatterns = [
     path('modalidade/<pk>/', ModalidadeDetailView.as_view()),
     path('modalidade/<pk>/update', ModalidadeUpdateView.as_view()),
     path('modalidade/<pk>/delete/', ModalidadeDeleteView.as_view()),
+    # Atleta URLs
+    path('atleta/', AtletaView.as_view(), name='atleta_list'),
+    path('atleta_create/', AtletaCreateView.as_view()),
+    path('atleta/<pk>/', AtletaDetailView.as_view()),
+    path('atleta/<pk>/update', AtletaUpdateView.as_view()),
+    path('atleta/<pk>/delete/', AtletaDeleteView.as_view()),
 ]

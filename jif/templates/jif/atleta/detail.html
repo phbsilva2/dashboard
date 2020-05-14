@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+	{% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item"><a href="{% url 'atleta_list' %}">{{atleta.get_verbose_name}}</a></li>
+        <li class="breadcrumb-item active">Visualizar</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Visualizar {{atleta.get_verbose_name}}
+        </div>
+         <div class="card-body">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Foto:</span>
+                        </th>
+                        <td>
+<!--                            <img src="{# TODO {atleta.foto.url}}" class="img-fluid"/> # Corrigir visualização da imagem  -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Nome:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.nome}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>CPF:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.cpf}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>RG:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.rg}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Matrícula:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.matricula}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Gênero:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.get_genero_display}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Data de Nascimento:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.data_nascimento}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Tipo Snaguíneo:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.tipo_sanguineo}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Plano de Saúde:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.plano_saude}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Número Carteira SUS:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.numero_carteira_sus}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Medicamento Controlado:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.medicamento_controlado}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:190px">
+                            <span>Agergia:</span>
+                        </th>
+                        <td>
+                            <span>{{atleta.alergia}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+             <div class="box-tools pull-left">
+                <a href="{% url 'atleta_list' %}" class="btn btn-primary btn-sm"> Voltar </a>
+            </div>
+         </div>
+    </div>
+{% endblock %}

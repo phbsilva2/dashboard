@@ -22,21 +22,9 @@
 			{% if perms.jif.view_modalidade %}
 			<li><a href="{% url 'modalidade_list' %}">Modalidade</a></li>
 			{% endif %}
-			<li>
-				<a href="#link3nivel" class="nav-link-collapse collapse"
-				data-toggle="collapse">Links 3o Nível</a>
-				<ul class="sidenav-third-level collapse" id="link3nivel">
-					<li>
-						<a href="#">Link 3.1</a>
-					</li>
-					<li>
-						<a href="#">Link 3.2</a>
-					</li>
-					<li>
-						<a href="#">Link 3.3</a>
-					</li>
-				</ul>
-			</li>
+			{% if perms.jif.view_atleta %}
+			<li><a href="{% url 'atleta_list' %}">Atleta</a></li>
+			{% endif %}
 		</ul>
 	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">

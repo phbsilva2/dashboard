@@ -1,4 +1,5 @@
 from django.db import models
+from stdimage.models import StdImageField
 
 
 class UnidadeOrganizacional(models.Model):
@@ -68,6 +69,54 @@ class Modalidade(models.Model):
     class Meta:
         verbose_name = 'Modalidade'
         verbose_name_plural = 'Modalidades'
+
+    def __str__(self):
+        return self.nome
+
+    def get_verbose_name(self):
+        return self._meta.verbose_name
+
+    def get_verbose_name_plural(self):
+        return self._meta.verbose_name_plural
+
+
+class Atleta (models.Model):
+    # Atleta é ...
+    #
+    # UC01 - Manter Atletas
+    #     FA01 - Incluir Atleta
+    #         2. O sistema apresenta os campos para entrada dos dados:
+    #             - Nome (Obrigatório)
+    #             - Foto
+    #             - CPF (Obrigatório / Não se repete)
+    #             - RG (Obrigatório / Não se repete)
+    #             - Matrícula (Obrigatório / Não se repete)
+    #             - Gênero (Obrigatório)
+    #             - Masculino;
+    #             - Feminino.
+    #             - Data de Nascimento
+    #             - Tipo Sanguíneo
+    #             - Plano de Saúde
+    #             - Nº Carteira SUS
+    #             - Medicamento Controlado
+    #             - Alergia
+
+    nome = models.CharField(max_length=100)
+    foto = StdImageField(upload_to='atletas', variations={'thumb': (124, 124)}, blank=True)
+    cpf = models.CharField('CPF', max_length=11, unique=True)
+    rg = models.CharField('RG', max_length=50, unique=True)
+    matricula = models.CharField('Matrícula', max_length=20, unique=True)
+    genero = models.CharField('Gênero', max_length=1, choices=[['M', 'Masculino'], ['F', 'Femenino']])
+    data_nascimento = models.DateField('Data de Nascimento', blank=True, null=True)
+    tipo_sanguineo = models.CharField('Tipo Sanguíneo', max_length=3, blank=True)
+    plano_saude = models.CharField('Plano de Saúde', max_length=200, blank=True)
+    numero_carteira_sus = models.CharField('Nº Carteira do SUS', max_length=20, blank=True)
+    medicamento_controlado = models.TextField('Medicamento Controlado', blank=True)
+    alergia = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = 'Atleta'
+        verbose_name_plural = 'Atletas'
 
     def __str__(self):
         return self.nome
