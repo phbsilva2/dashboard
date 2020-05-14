@@ -47,3 +47,33 @@ class TipoModalidade(models.Model):
 
     def get_verbose_name_plural(self):
         return self._meta.verbose_name_plural
+
+
+class Modalidade(models.Model):
+    # Modalidade é ...
+    #
+    # UC03 - Manter Modalidades
+    #     FA01 - Incluir Modalidade
+    #         2. O sistema apresenta os campos para entrada dos dados:
+    #             - Nome (Obrigatório / Não se repete)
+    #             - Sigla (Obrigatório / Não se repete)
+    #             - Tipo (Obrigatório) [IndividuaL/Coletivo]
+    #             - Tipo de Modalidade (Obrigatório)
+
+    nome = models.CharField(max_length=100, unique=True)
+    sigla = models.CharField(max_length=10, unique=True)
+    tipo = models.CharField(max_length=1, choices=[['I', 'Individual'], ['C', 'Coletivo']])
+    tipo_modalidade = models.ForeignKey(TipoModalidade, on_delete=models.CASCADE, verbose_name='Tipo de Modalidade')
+
+    class Meta:
+        verbose_name = 'Modalidade'
+        verbose_name_plural = 'Modalidades'
+
+    def __str__(self):
+        return self.nome
+
+    def get_verbose_name(self):
+        return self._meta.verbose_name
+
+    def get_verbose_name_plural(self):
+        return self._meta.verbose_name_plural

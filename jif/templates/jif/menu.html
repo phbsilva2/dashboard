@@ -19,9 +19,9 @@
 			{% if perms.jif.view_tipomodalidade %}
 			<li><a href="{% url 'tipo_modalidade_list' %}">Tipo de Modalidade</a></li>
 			{% endif %}
-			<li>
-				<a href="#">Menu 2.3</a>
-			</li>
+			{% if perms.jif.view_modalidade %}
+			<li><a href="{% url 'modalidade_list' %}">Modalidade</a></li>
+			{% endif %}
 			<li>
 				<a href="#link3nivel" class="nav-link-collapse collapse"
 				data-toggle="collapse">Links 3o Nível</a>

@@ -18,6 +18,14 @@ from jif.views.tipo_modalidade_views import (
     TipoModalidadeDeleteView
 )
 
+from jif.views.modalidade_views import (
+    ModalidadeView,
+    ModalidadeCreateView,
+    ModalidadeDetailView,
+    ModalidadeUpdateView,
+    ModalidadeDeleteView
+)
+
 
 urlpatterns = [
     # Index URL
@@ -34,4 +42,10 @@ urlpatterns = [
     path('tipomodalidade/<pk>/', TipoModalidadeDetailView.as_view()),
     path('tipomodalidade/<pk>/update', TipoModalidadeUpdateView.as_view()),
     path('tipomodalidade/<pk>/delete/', TipoModalidadeDeleteView.as_view()),
+    # Modalidade URLs
+    path('modalidade/', ModalidadeView.as_view(), name='modalidade_list'),
+    path('modalidade_create/', ModalidadeCreateView.as_view()),
+    path('modalidade/<pk>/', ModalidadeDetailView.as_view()),
+    path('modalidade/<pk>/update', ModalidadeUpdateView.as_view()),
+    path('modalidade/<pk>/delete/', ModalidadeDeleteView.as_view()),
 ]
