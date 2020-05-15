@@ -31,6 +31,9 @@
                     <tr>
                         <th></th>
                         <th>Nome</th>
+                        <th>Tipo de Modalidade</th>
+                        <th>Tipo</th>
+                        <th>Lotação Permitida</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +52,15 @@
                         </td>
                         <td>
                             <span>{{m.nome}}</span>
+                        </td>
+                        <td>
+                            <span>{{m.tipo_modalidade}}</span>
+                        </td>
+                        <td>
+                            <span>{{m.get_tipo_display}}</span>
+                        </td>
+                        <td>
+                            <span>{{m.lotacao_permitida}}</span>
                         </td>
                     </tr>
                     {% endfor %}
