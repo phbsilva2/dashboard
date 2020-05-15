@@ -1,12 +1,6 @@
 {% extends '_nav_sidebar.html' %}
 {% block nav_links %}
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link" href="#">
-			<i class="fa fa-fw fa-table"></i>
-			<span class="nav-link-text">Link 1o Nível</span>
-		</a>
-	</li>
-	<li class="nav-item" data-toggle="tooltip" data-placement="right">
 		<a class="nav-link nav-link-collapse collapse" href="#cadastro"
 		data-toggle="collapse" data-parent="#linksaccordion">
 			<i class="fa fa-fw fa-wrench"></i>
@@ -31,21 +25,13 @@
 		</ul>
 	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link nav-link-collapse collapse" href="#linksexemplo"
+		<a class="nav-link nav-link-collapse collapse" href="#relatorio"
 		data-toggle="collapse" data-parent="#linksaccordion">
-			<i class="fa fa-fw fa-file"></i>
-			<span class="nav-link-text">Páginas</span>
+			<i class="fa fa-fw fa-wrench"></i>
+			<span class="nav-link-text">Relatórios</span>
 		</a>
-		<ul class="sidenav-second-level collapse" id="linksexemplo">
-			<li>
-				<a href="#">Página A</a>
-			</li>
-			<li>
-				<a href="#">Página B</a>
-			</li>
-			<li>
-				<a href="#">Página C</a>
-			</li>
+		<ul class="sidenav-second-level collapse" id="relatorio">
+			<li><a href="{% url 'atleta_campus' %}">Atletas por Campus</a></li>
 		</ul>
 	</li>
 {% endblock %}

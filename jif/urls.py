@@ -42,6 +42,8 @@ from jif.views.inscricao_views import (
     InscricaoDeleteView
 )
 
+from .views import relatorio_views
+
 
 urlpatterns = [
     # Index URL
@@ -76,4 +78,6 @@ urlpatterns = [
     path('inscricao/<pk>/', InscricaoDetailView.as_view()),
     path('inscricao/<pk>/update', InscricaoUpdateView.as_view()),
     path('inscricao/<pk>/delete/', InscricaoDeleteView.as_view()),
+    # Relatório URLs
+    path('atletacampus/', relatorio_views.atleta_campus, name='atleta_campus'),
 ]
