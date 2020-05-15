@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item active">{{inscricao.get_verbose_name}}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            {{inscricao.get_verbose_name_plural}}
+            <div class="box-tools pull-right">
+                {% if perms.jif.add_inscricao %}
+                <a href="/inscricao_create/" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar {{inscricao.get_verbose_name}}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Inscrição</th>
+                        <th>Modalidade</th>
+                        <th>Atleta</th>
+                        <th>Unidade Organizacinal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in inscricoes %}
+                    <tr class="row1">
+                        <td style="width:70px">
+                            {% if perms.jif.view_inscricao %}
+                            <a href="/inscricao/{{i.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.edit_inscricao %}
+                            <a href="/inscricao/{{i.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.delete_inscricao %}
+                            <a href="/inscricao/{{i.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{i.id}}</span>
+                        </td>
+                        <td>
+                            <span>{{i.modalidade}}</span>
+                        </td>
+                        <td>
+                            <span>{{i.atleta}}</span>
+                        </td>
+                        <td>
+                            <span>{{i.unidade_organizacional}}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

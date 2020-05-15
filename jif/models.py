@@ -133,3 +133,34 @@ class Atleta (models.Model):
 
     def get_verbose_name_plural(self):
         return self._meta.verbose_name_plural
+
+
+class Inscricao(models.Model):
+    # Inscrição é ...
+    #
+    # UC07 - Manter Inscrições
+    #     FA01 - Incluir Inscrição
+    #         2. O sistema apresenta os campos para entrada dos dados:
+    #             - Modalidade (Obrigatório);
+    #             - Atleta (Obrigatório);
+    #             - Unidade (Obrigatório)
+
+    modalidade = models.ForeignKey(Modalidade, on_delete=models.CASCADE, verbose_name='Modalidade')
+    atleta = models.ForeignKey(Atleta, on_delete=models.CASCADE, verbose_name='Atleta')
+    unidade_organizacional = models.ForeignKey(UnidadeOrganizacional, on_delete=models.CASCADE, verbose_name='Unidade Organizacional')
+
+    objects = models.Manager()
+
+    class Meta:
+        unique_together = ['modalidade', 'atleta', 'unidade_organizacional']
+        verbose_name = 'Inscrição'
+        verbose_name_plural = 'Inscrições'
+
+    def __str__(self):
+        return f"{self.pk}"
+
+    def get_verbose_name(self):
+        return self._meta.verbose_name
+
+    def get_verbose_name_plural(self):
+        return self._meta.verbose_name_plural
