@@ -3,6 +3,7 @@ from django import forms
 from .models import (
     UnidadeOrganizacional,
     Modalidade,
+    TipoModalidade,
 )
 
 
@@ -12,3 +13,7 @@ class RelatorioAtletasCampusForm(forms.Form):
 
 class RelatorioAtletasModalidadeForm(forms.Form):
     modalidade = forms.ModelChoiceField(Modalidade.objects.all().order_by('nome'), required=False)
+
+
+class RelatorioAtletasTipoModalidadeForm(forms.Form):
+    tipo_modalidade = forms.ModelChoiceField(TipoModalidade.objects.all().order_by('titulo'), required=False)

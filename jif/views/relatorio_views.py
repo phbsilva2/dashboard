@@ -7,6 +7,7 @@ from jif.models import (
 from jif.forms import (
     RelatorioAtletasCampusForm,
     RelatorioAtletasModalidadeForm,
+    RelatorioAtletasTipoModalidadeForm,
 )
 
 
@@ -54,3 +55,26 @@ def atleta_modalidade(request):
         'form': form
     }
     return render(request, 'jif/relatorio/atletamodalidade.html', context)
+
+
+def atleta_tipo_modalidade(request):
+    form = RelatorioAtletasTipoModalidadeForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            if form.cleaned_data['tipo_modalidade']:
+                tipo_modalidade_id = form.cleaned_data['tipo_modalidade'].pk
+                inscricoes = Inscricao.objects.filter(modalidade__tipo_modalidade__pk=tipo_modalidade_id).order_by('atleta__nome')
+                mostrar_tipo_modalidade = False
+            else:
+                inscricoes = Inscricao.objects.all().order_by('modalidade__tipo_modalidade__titulo', 'atleta__nome')
+                mostrar_tipo_modalidade = True
+
+            return render(request, 'jif/relatorio/atletatipomodalidade.html',
+                          {'form': form, 'inscricoes': inscricoes, 'mostrar_tipo_modalidade': mostrar_tipo_modalidade})
+    else:
+        form = RelatorioAtletasTipoModalidadeForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'jif/relatorio/atletatipomodalidade.html', context)
