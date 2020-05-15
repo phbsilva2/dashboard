@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block nav_sidebar %}
 	{% include 'jif/menu.html' %}
@@ -26,7 +27,11 @@
                             <span>Foto:</span>
                         </th>
                         <td>
-<!--                            <img src="{# TODO {atleta.foto.url}}" class="img-fluid"/> # Corrigir visualização da imagem  -->
+                            {% if atleta.foto.thumb.url %}
+                            <img src="/{{atleta.foto.thumb.url}}" class="img-thumbnail"/>
+                            {% else %}
+                             <img src="{% static '/imagens/anonimo.jpg' %}" class="img-thumbnail"/>
+                            {% endif %}
                         </td>
                     </tr>
                     <tr>

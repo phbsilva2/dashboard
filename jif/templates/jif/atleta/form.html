@@ -27,7 +27,7 @@
             {% endif %}
         </div>
         <div class="card-body">
-            <form method="post">
+            <form method="post" class="form" autocomplete="off" enctype="multipart/form-data">
                 {% if atleta %}
                 <p>Você está editando '{{ atleta.nome }}' </p>
                 {% endif %}

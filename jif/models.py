@@ -102,7 +102,7 @@ class Atleta (models.Model):
     #             - Alergia
 
     nome = models.CharField(max_length=100)
-    foto = StdImageField(upload_to='atletas', variations={'thumb': (124, 124)}, blank=True)
+    foto = StdImageField(upload_to='atletas', variations={'thumb': (124, 124)}, blank=True)  # TODO Aperfeiçoar parâmetros: https://pypi.org/project/django-stdimage/
     cpf = models.CharField('CPF', max_length=11, unique=True)
     rg = models.CharField('RG', max_length=50, unique=True)
     matricula = models.CharField('Matrícula', max_length=20, unique=True)
