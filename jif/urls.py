@@ -80,4 +80,5 @@ urlpatterns = [
     path('inscricao/<pk>/delete/', InscricaoDeleteView.as_view()),
     # Relatório URLs
     path('atletacampus/', relatorio_views.atleta_campus, name='atleta_campus'),
+    path('atletamodalidade/', relatorio_views.atleta_modalidade, name='atleta_modalidade'),
 ]
