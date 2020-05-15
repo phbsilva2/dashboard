@@ -82,4 +82,5 @@ urlpatterns = [
     path('atletacampus/', relatorio_views.atleta_campus, name='atleta_campus'),
     path('atletamodalidade/', relatorio_views.atleta_modalidade, name='atleta_modalidade'),
     path('atletatipomodalidade/', relatorio_views.atleta_tipo_modalidade, name='atleta_tipo_modalidade'),
+    path('inscricoesatletas/', relatorio_views.inscricoes_atletas, name='inscricoes_atletas'),
 ]

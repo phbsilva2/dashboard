@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item active">Fichas de Inscrição</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Fichas de Inscrição
+        </div>
+
+        <div class="card-body">
+            <form action="{% url 'inscricoes_atletas' %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="default" value="Enviar">
+            </form>
+        </div>
+
+        {% if inscricoes %}
+        <div class="box-tools pull-right">
+            <a href="/fichainscricao/{{ uo }}/{{ modalidade }}" class="btn btn-primary btn-sm">
+                <i class="fa fa-file-pdf-o"></i>
+                Gerar Ficha de Inscrição
+            </a>
+        </div>
+
+        <div class="results">
+            <table id="result_list" class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th><div class="text">Nome do Atleta</div></th>
+                        <th><div class="text">Data Nasc.</div></th>
+                        <th><div class="text">RG</div></th>
+                        <th><div class="text">Matrícula</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for inscricao in inscricoes %}
+                    <tr class="row1">
+                        <td>
+                            <span>{{inscricao.atleta.nome}}</span>
+                        </td>
+                        <td>
+                            {% if inscricao.atleta.data_nascimento %}
+                            <span>{{inscricao.atleta.data_nascimento}}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{inscricao.atleta.rg}}</span>
+                         </td>
+                        <td>
+                            <span>{{inscricao.atleta.matricula}}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

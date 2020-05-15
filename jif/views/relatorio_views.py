@@ -8,6 +8,7 @@ from jif.forms import (
     RelatorioAtletasCampusForm,
     RelatorioAtletasModalidadeForm,
     RelatorioAtletasTipoModalidadeForm,
+    RelatorioInscricoesForm,
 )
 
 
@@ -78,3 +79,26 @@ def atleta_tipo_modalidade(request):
         'form': form
     }
     return render(request, 'jif/relatorio/atletatipomodalidade.html', context)
+
+
+def inscricoes_atletas(request):
+    form = RelatorioInscricoesForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            unidade_organizacional_id = form.cleaned_data['unidade_organizacional'].pk
+            modalidade_id = form.cleaned_data['modalidade'].pk
+
+            inscricoes = Inscricao.objects.filter(unidade_organizacional__pk=unidade_organizacional_id, modalidade__pk=modalidade_id)
+
+            return render(request, 'jif/relatorio/inscricoesatletas.html',
+                          {'form': form,
+                           'inscricoes': inscricoes,
+                           'uo': unidade_organizacional_id,
+                           'modalidade': modalidade_id})
+    else:
+        form = RelatorioInscricoesForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'jif/relatorio/inscricoesatletas.html', context)
