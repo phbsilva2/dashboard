@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+	{% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="card mb-3">
+    <div class="card-header text-danger">
+        Erro 403: Acesso Negado/Proibido
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Você não tem permissão de acesso.</h5>
+    </div>
+</div>
+{% endblock %}
