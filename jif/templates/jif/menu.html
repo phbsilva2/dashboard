@@ -1,4 +1,14 @@
 {% extends '_nav_sidebar.html' %}
+
+{% block nav_top %}
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'admin:index' %}">
+			<i class="fa fa-users"></i>
+			<span class="nav-link-text">Grupos e Usuários</span>
+		</a>
+	</li>
+{% endblock %}
+
 {% block nav_links %}
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
 		<a class="nav-link nav-link-collapse collapse" href="#cadastro"
