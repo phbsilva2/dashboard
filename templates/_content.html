@@ -1,18 +1,15 @@
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="{% url 'index' %}">Início</a></li>
+    </ol>
+{% endblock %}
+
 <!-- Conteúdo -->
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="#">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-                Página Inicial
-            </li>
-        </ol>
-        <div class="row">
-            <div class="col-12">
-                <h1>Página Inicial</h1>
-            </div>
-        </div>
+<div class="card mb-3">
+    <div class="card-header">
+        Cabeçalho
+    </div>
+    <div class="card-body">
+        Conteúdo
     </div>
 </div>
