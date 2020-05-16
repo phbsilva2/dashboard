@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mm3wf@ma@8d&e4^g8=mugdq$bw&z+tnzxn-mo9q6a3q7n8+tbc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -119,6 +119,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+# Biblioteca necessária para mostrar arquivos estáticos e de mídia
+# no mabiente de produção (DEBUG=False):
+# pip install dj-static
 
 # Arquivos estáticos de cada aplicação (DEBUG=True)
 STATIC_URL = '/static/'
