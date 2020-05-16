@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jif',
     'stdimage',  # pip install django-stdimage
+    'reportlab',  # pip install reportlab
 ]
 
 MIDDLEWARE = [
@@ -119,19 +120,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# Arquivos estáticos de cada aplicação
+# Arquivos estáticos de cada aplicação (DEBUG=True)
 STATIC_URL = '/static/'
+# Arquivos estátivos para ambiente de produção (DEBUG=False)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Arquivos de mídia de cada aplicação (DEBUG=True)
 MEDIA_URL = 'media/'
+# Arquivos de mídia para ambiente de produção (DEBUG=False)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Arquivos estátios do projeto
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-# Arquivos estátivos para ambiente de produção (DEBUG=False)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'

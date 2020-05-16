@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from jif.models import (
     Inscricao,
@@ -11,7 +12,10 @@ from jif.forms import (
     RelatorioInscricoesForm,
 )
 
+from jif.reports import inscricao_pdf
 
+
+@login_required
 def atleta_campus(request):
     form = RelatorioAtletasCampusForm(request.POST or None)
 
@@ -35,6 +39,7 @@ def atleta_campus(request):
     return render(request, 'jif/relatorio/atletacampus.html', context)
 
 
+@login_required
 def atleta_modalidade(request):
     form = RelatorioAtletasModalidadeForm(request.POST or None)
 
@@ -58,6 +63,7 @@ def atleta_modalidade(request):
     return render(request, 'jif/relatorio/atletamodalidade.html', context)
 
 
+@login_required
 def atleta_tipo_modalidade(request):
     form = RelatorioAtletasTipoModalidadeForm(request.POST or None)
 
@@ -81,6 +87,7 @@ def atleta_tipo_modalidade(request):
     return render(request, 'jif/relatorio/atletatipomodalidade.html', context)
 
 
+@login_required
 def inscricoes_atletas(request):
     form = RelatorioInscricoesForm(request.POST or None)
 
@@ -102,3 +109,30 @@ def inscricoes_atletas(request):
         'form': form
     }
     return render(request, 'jif/relatorio/inscricoesatletas.html', context)
+
+
+@login_required
+def fichaisncricao(request, uo_id, modalidade_id):
+    dados_inscritos = []
+    uo_nome = ""
+    modalidade_nome = ""
+
+    inscricoes = Inscricao.objects.filter(unidade_organizacional__pk=uo_id, modalidade__pk=modalidade_id)
+    if inscricoes:
+        for inscr in inscricoes:
+            dados_inscrito = []
+            dados_inscrito.append(str(inscr.atleta.nome))
+            if inscr.atleta.data_nascimento:
+                dados_inscrito.append('{:%d/%m/%Y}'.format(inscr.atleta.data_nascimento))
+            else:
+                dados_inscrito.append(None)
+            dados_inscrito.append(str(inscr.atleta.rg))
+            dados_inscrito.append(str(inscr.atleta.matricula))
+            if not uo_nome:
+                uo_nome = inscr.unidade_organizacional.nome
+            if not modalidade_nome:
+                modalidade_nome = inscr.modalidade.nome
+
+            dados_inscritos.append(dados_inscrito)
+
+        return inscricao_pdf(uo_nome, modalidade_nome, dados_inscritos)

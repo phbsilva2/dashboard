@@ -15,6 +15,14 @@
     <div class="card mb-3">
         <div class="card-header">
             Fichas de Inscrição
+            {% if inscricoes %}
+            <div class="box-tools pull-right">
+                <a href="/fichainscricao/{{ uo }}/{{ modalidade }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <span>Gerar Ficha de Inscrição</span>
+                </a>
+            </div>
+            {% endif %}
         </div>
 
         <div class="card-body">
@@ -26,19 +34,12 @@
         </div>
 
         {% if inscricoes %}
-        <div class="box-tools pull-right">
-            <a href="/fichainscricao/{{ uo }}/{{ modalidade }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-file-pdf-o"></i>
-                Gerar Ficha de Inscrição
-            </a>
-        </div>
-
         <div class="results">
             <table id="result_list" class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th><div class="text">Nome do Atleta</div></th>
-                        <th><div class="text">Data Nasc.</div></th>
+                        <th><div class="text">Data Nascimento</div></th>
                         <th><div class="text">RG</div></th>
                         <th><div class="text">Matrícula</div></th>
                     </tr>
