@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mm3wf@ma@8d&e4^g8=mugdq$bw&z+tnzxn-mo9q6a3q7n8+tbc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jif',
+    'stdimage',  # pip install django-stdimage
+    'reportlab',  # pip install reportlab
 ]
 
 MIDDLEWARE = [
@@ -118,16 +120,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# Arquivos estáticos de cada aplicação
+# Biblioteca necessária para mostrar arquivos estáticos e de mídia
+# no mabiente de produção (DEBUG=False):
+# pip install dj-static
+
+# Arquivos estáticos de cada aplicação (DEBUG=True)
 STATIC_URL = '/static/'
+# Arquivos estátivos para ambiente de produção (DEBUG=False)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Arquivos de mídia de cada aplicação (DEBUG=True)
+MEDIA_URL = 'media/'
+# Arquivos de mídia para ambiente de produção (DEBUG=False)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Arquivos estátios do projeto
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-# Arquivos estátivos para ambiente de produção (DEBUG=False)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'

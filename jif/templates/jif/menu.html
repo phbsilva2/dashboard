@@ -1,60 +1,55 @@
 {% extends '_nav_sidebar.html' %}
-{% block nav_links %}
-	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link" href="#">
-			<i class="fa fa-fw fa-table"></i>
-			<span class="nav-link-text">Link 1o Nível</span>
+
+{% block nav_top %}
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'admin:index' %}">
+			<i class="fa fa-users"></i>
+			<span class="nav-link-text">Grupos e Usuários</span>
 		</a>
 	</li>
+{% endblock %}
+
+{% block nav_links %}
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
 		<a class="nav-link nav-link-collapse collapse" href="#cadastro"
 		data-toggle="collapse" data-parent="#linksaccordion">
-			<i class="fa fa-fw fa-wrench"></i>
+			<i class="fa fa-newspaper-o"></i>
 			<span class="nav-link-text">Cadastros</span>
 		</a>
 		<ul class="sidenav-second-level collapse" id="cadastro">
 			{% if perms.jif.view_unidadeorganizacional %}
-			<li><a href="{% url 'unidade_organizacional_list' %}">Unidade Organizacional</a></li>
+			<li><a href="{% url 'unidade_organizacional_list' %}">Unidades Organizacionais</a></li>
 			{% endif %}
 			{% if perms.jif.view_tipomodalidade %}
-			<li><a href="{% url 'tipo_modalidade_list' %}">Tipo de Modalidade</a></li>
+			<li><a href="{% url 'tipo_modalidade_list' %}">Tipos de Modalidades</a></li>
 			{% endif %}
-			<li>
-				<a href="#">Menu 2.3</a>
-			</li>
-			<li>
-				<a href="#link3nivel" class="nav-link-collapse collapse"
-				data-toggle="collapse">Links 3o Nível</a>
-				<ul class="sidenav-third-level collapse" id="link3nivel">
-					<li>
-						<a href="#">Link 3.1</a>
-					</li>
-					<li>
-						<a href="#">Link 3.2</a>
-					</li>
-					<li>
-						<a href="#">Link 3.3</a>
-					</li>
-				</ul>
-			</li>
+			{% if perms.jif.view_modalidade %}
+			<li><a href="{% url 'modalidade_list' %}">Modalidades</a></li>
+			{% endif %}
+			{% if perms.jif.view_atleta %}
+			<li><a href="{% url 'atleta_list' %}">Atletas</a></li>
+			{% endif %}
+			{% if perms.jif.view_inscricao %}
+			<li><a href="{% url 'inscricao_list' %}">Inscrições</a></li>
+			{% endif %}
 		</ul>
 	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link nav-link-collapse collapse" href="#linksexemplo"
+		<a class="nav-link nav-link-collapse collapse" href="#relatorio"
 		data-toggle="collapse" data-parent="#linksaccordion">
-			<i class="fa fa-fw fa-file"></i>
-			<span class="nav-link-text">Páginas</span>
+			<i class="fa fa-copy"></i>
+			<span class="nav-link-text">Relatórios</span>
 		</a>
-		<ul class="sidenav-second-level collapse" id="linksexemplo">
-			<li>
-				<a href="#">Página A</a>
-			</li>
-			<li>
-				<a href="#">Página B</a>
-			</li>
-			<li>
-				<a href="#">Página C</a>
-			</li>
+		<ul class="sidenav-second-level collapse" id="relatorio">
+			<li><a href="{% url 'atleta_campus' %}">Atletas por Campus</a></li>
+			<li><a href="{% url 'atleta_modalidade' %}">Atletas por Modalidade</a></li>
+			<li><a href="{% url 'atleta_tipo_modalidade' %}">Atletas por Tipo de Modalidade</a></li>
 		</ul>
+	</li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+		<a class="nav-link" href="{% url 'inscricoes_atletas' %}">
+			<i class="fa fa-file-text-o"></i>
+			<span class="nav-link-text">Fichas de Inscrição</span>
+		</a>
 	</li>
 {% endblock %}

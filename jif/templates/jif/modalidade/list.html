@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item active">{{modalidade.get_verbose_name}}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            {{modalidade.get_verbose_name_plural}}
+            <div class="box-tools pull-right">
+                {% if perms.jif.add_modalidade %}
+                <a href="/modalidade_create/" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar {{modalidade.get_verbose_name}}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                        <th>Tipo de Modalidade</th>
+                        <th>Tipo</th>
+                        <th>Lotação Permitida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in modalidades %}
+                    <tr class="row1">
+                        <td style="width:70px">
+                            {% if perms.jif.view_modalidade %}
+                            <a href="/modalidade/{{m.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.edit_modalidade %}
+                            <a href="/modalidade/{{m.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.delete_modalidade %}
+                            <a href="/modalidade/{{m.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{m.nome}}</span>
+                        </td>
+                        <td>
+                            <span>{{m.tipo_modalidade}}</span>
+                        </td>
+                        <td>
+                            <span>{{m.get_tipo_display}}</span>
+                        </td>
+                        <td>
+                            <span>{{m.lotacao_permitida}}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
