@@ -43,7 +43,7 @@
                             {% if perms.jif.view_atleta %}
                             <a href="/atleta/{{atleta.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
                             {% endif %}
-                            {% if perms.jif.edit_atleta %}
+                            {% if perms.jif.change_atleta %}
                             <a href="/atleta/{{atleta.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_atleta %}

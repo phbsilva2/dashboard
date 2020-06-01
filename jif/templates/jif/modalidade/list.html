@@ -43,7 +43,7 @@
                             {% if perms.jif.view_modalidade %}
                             <a href="/modalidade/{{m.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
                             {% endif %}
-                            {% if perms.jif.edit_modalidade %}
+                            {% if perms.jif.change_modalidade %}
                             <a href="/modalidade/{{m.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_modalidade %}
