@@ -43,7 +43,7 @@
                             {% if perms.jif.view_inscricao %}
                             <a href="/inscricao/{{i.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
                             {% endif %}
-                            {% if perms.jif.edit_inscricao %}
+                            {% if perms.jif.change_inscricao %}
                             <a href="/inscricao/{{i.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_inscricao %}
