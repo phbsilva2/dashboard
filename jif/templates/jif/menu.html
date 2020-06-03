@@ -35,6 +35,12 @@
 		</ul>
 	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
+		<a class="nav-link" href="{% url 'inscricoes_atletas' %}">
+			<i class="fa fa-file-text-o"></i>
+			<span class="nav-link-text">Fichas de Inscrição</span>
+		</a>
+	</li>
+	<li class="nav-item" data-toggle="tooltip" data-placement="right">
 		<a class="nav-link nav-link-collapse collapse" href="#relatorio"
 		data-toggle="collapse" data-parent="#linksaccordion">
 			<i class="fa fa-copy"></i>
@@ -47,9 +53,9 @@
 		</ul>
 	</li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link" href="{% url 'inscricoes_atletas' %}">
-			<i class="fa fa-file-text-o"></i>
-			<span class="nav-link-text">Fichas de Inscrição</span>
+		<a class="nav-link" href="{% url 'grafico' %}">
+			<i class="fa fa-bar-chart"></i>
+			<span class="nav-link-text">Gráficos</span>
 		</a>
 	</li>
 {% endblock %}
