@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'jif',
     'stdimage',  # pip install django-stdimage
     'reportlab',  # pip install reportlab
+    'chartjs',  # pip install django-chartjs
 ]
 
 MIDDLEWARE = [
