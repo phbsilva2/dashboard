@@ -23,7 +23,19 @@
                         </div>
                         <div class="card-body">
                             <div class="container">
-                                 <canvas id="grafico_inscricao_campus" width="500" height="300"></canvas>
+                                 <canvas id="grafico_inscricao_campus" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <span class="text-center">Inscrições por Modalidade</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                 <canvas id="grafico_inscricao_modalidade" width="400" height="300"></canvas>
                             </div>
                         </div>
                     </div>
@@ -38,7 +50,16 @@
 
     <script type="text/javascript">
         $.get('{% url "dados_inscricao_campus" %}', function(data){
-            var ctx = $("#grafico_inscricao_campus").get(0).getContext("2d");
+            const ctx = $("#grafico_inscricao_campus").get(0).getContext("2d");
+            new Chart(ctx, {
+                type: 'bar',
+                data: data.data,
+                options: data.options,
+            });
+        });
+
+        $.get('{% url "dados_inscricao_modalidade" %}', function(data){
+            const ctx = $("#grafico_inscricao_modalidade").get(0).getContext("2d");
             new Chart(ctx, {
                 type: 'bar',
                 data: data.data,
