@@ -19,11 +19,11 @@
                 <div class="col-md-6">
                     <div class="card mb-3">
                         <div class="card-header">
-                            <span class="text-center">Atletas por Campus</span>
+                            <span class="text-center">Inscrições por Campus</span>
                         </div>
                         <div class="card-body">
                             <div class="container">
-                                 <canvas id="grafico" width="500" height="400"></canvas>
+                                 <canvas id="grafico_inscricao_campus" width="500" height="300"></canvas>
                             </div>
                         </div>
                     </div>
@@ -37,8 +37,8 @@
     <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
 
     <script type="text/javascript">
-        $.get('{% url "dados_atleta_campus" %}', function(data){
-            var ctx = $("#grafico").get(0).getContext("2d");
+        $.get('{% url "dados_inscricao_campus" %}', function(data){
+            var ctx = $("#grafico_inscricao_campus").get(0).getContext("2d");
             new Chart(ctx, {
                 type: 'bar',
                 data: data,
