@@ -43,8 +43,8 @@ from jif.views.inscricao_views import (
 )
 
 from jif.views.grafico_views import (
-    GraficoInscricaoCampusView,
-    DadosInscricaoCampusView
+    GraficoView,
+    InscricaoCampusJSONView
 )
 
 from .views import relatorio_views
@@ -89,7 +89,7 @@ urlpatterns = [
     path('atletatipomodalidade/', relatorio_views.atleta_tipo_modalidade, name='atleta_tipo_modalidade'),
     path('inscricoesatletas/', relatorio_views.inscricoes_atletas, name='inscricoes_atletas'),
     path('fichainscricao/<int:uo_id>/<int:modalidade_id>', relatorio_views.fichaisncricao, name='ficha_inscricao'),
-    # Gráficos URLs
-    path('graficoinscricaocampus/', GraficoInscricaoCampusView.as_view(), name='grafico_inscricao_campus'),
-    path('dadosinscricaocampus/', DadosInscricaoCampusView.as_view(), name='dados_inscricao_campus'),
+    # Gráfico URLs
+    path('grafico/', GraficoView.as_view(), name='grafico'),
+    path('dadosinscricaocampus/', InscricaoCampusJSONView.as_view(), name='dados_inscricao_campus'),
 ]
