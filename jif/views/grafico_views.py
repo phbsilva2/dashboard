@@ -11,27 +11,27 @@ class GraficoView(TemplateView):
 
 
 class InscricaoCampusMixin(object):
-    inscricoes = Inscricao.objects.all().values('unidade_organizacional__nome').annotate(
-        total=Count('unidade_organizacional__nome')).order_by('total')
 
     def get_labels(self):
         labels = ["Inscrições"]
-
         return labels
 
     def get_providers(self):
         datasets = []
+        inscricoes = Inscricao.objects.all().values('unidade_organizacional__nome').annotate(
+            total=Count('unidade_organizacional__nome')).order_by('unidade_organizacional__nome')
 
-        for inscricao in self.inscricoes:
+        for inscricao in inscricoes:
             datasets.append(inscricao['unidade_organizacional__nome'])
-
         return datasets
 
     def get_data(self):
         dados = []
-        for inscricao in self.inscricoes:
-            dados.append([inscricao['total']])
+        inscricoes = Inscricao.objects.all().values('unidade_organizacional__nome').annotate(
+            total=Count('unidade_organizacional__nome')).order_by('unidade_organizacional__nome')
 
+        for inscricao in inscricoes:
+            dados.append([inscricao['total']])
         return dados
 
     def get_colors(self):
@@ -63,27 +63,27 @@ class InscricaoCampusJSONView(InscricaoCampusMixin, BaseLineOptionsChartView):
 
 
 class InscricaoModalidadeMixin(object):
-    inscricoes = Inscricao.objects.all().values('modalidade__nome').annotate(
-        total=Count('modalidade__nome')).order_by('total')
 
     def get_labels(self):
         labels = ["Inscrições"]
-
         return labels
 
     def get_providers(self):
         datasets = []
+        inscricoes = Inscricao.objects.all().values('modalidade__nome').annotate(
+            total=Count('modalidade__nome')).order_by('modalidade__nome')
 
-        for inscricao in self.inscricoes:
+        for inscricao in inscricoes:
             datasets.append(inscricao['modalidade__nome'])
-
         return datasets
 
     def get_data(self):
         dados = []
-        for inscricao in self.inscricoes:
-            dados.append([inscricao['total']])
+        inscricoes = Inscricao.objects.all().values('modalidade__nome').annotate(
+            total=Count('modalidade__nome')).order_by('modalidade__nome')
 
+        for inscricao in inscricoes:
+            dados.append([inscricao['total']])
         return dados
 
     def get_colors(self):
