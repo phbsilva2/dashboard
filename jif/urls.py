@@ -45,7 +45,8 @@ from jif.views.inscricao_views import (
 from jif.views.grafico_views import (
     GraficoView,
     InscricaoCampusJSONView,
-    InscricaoModalidadeJSONView
+    InscricaoModalidadeJSONView,
+    InscricaoModalidadeLineJSONView
 )
 
 from .views import relatorio_views
@@ -94,4 +95,5 @@ urlpatterns = [
     path('grafico/', GraficoView.as_view(), name='grafico'),
     path('dadosinscricaocampus/', InscricaoCampusJSONView.as_view(), name='dados_inscricao_campus'),
     path('dadosinscricaomodalidade/', InscricaoModalidadeJSONView.as_view(), name='dados_inscricao_modalidade'),
+    path('dadosinscricaomodalidadeLine/', InscricaoModalidadeLineJSONView.as_view(), name='dados_inscricao_modalidadeLine'),
 ]

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block nav_sidebar %}
 	{% include 'jif/menu.html' %}
@@ -95,6 +96,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row py-4">
+                <div class="col-md-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="container">
+                                <canvas id="grafico_inscricao_modalidade" width="200" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </div>
 {% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+
+    <script type="text/javascript">
+        $.get('{% url "dados_inscricao_modalidadeLine" %}', function(data){
+            const ctx = $("#grafico_inscricao_modalidade").get(0).getContext("2d");
+            new Chart(ctx, {
+                type: 'line',
+                data: data.data,
+                options: data.options,
+            });
+        });
+    </script>
+{% endblock %}
+
