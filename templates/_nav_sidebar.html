@@ -1,4 +1,5 @@
 <!-- Navegação principal -->
+{% load avatar_tags %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 	<a class="navbar-brand" href="{% url 'index' %}">Sistema JIF</a>
 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -8,6 +9,16 @@
 
 	<div id="navbarMenu" class="collapse navbar-collapse">
 		<ul class="navbar-nav navbar-sidenav" id="linksaccordion">
+			<div class="container text-white">
+				<div class="row justify-content-start">
+					<div class="col-3">
+						{% avatar user 45 class="rounded-circle float-left img-responsive" id="user_avatar" %}
+					</div>
+					<div class="col-3">
+						{% firstof request.user.get_short_name request.user.get_username %}
+					</div>
+				</div>
+			</div>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right">
 				<a class="nav-link" href="{% url 'index' %}">
 					<i class="fa fa-home"></i>
