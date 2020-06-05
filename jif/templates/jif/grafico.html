@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Gráficos</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <section class="container">
+            <div class="row py-4">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <span class="text-center">Inscrições por Campus</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                 <canvas id="grafico_inscricao_campus" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <span class="text-center">Inscrições por Modalidade</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                 <canvas id="grafico_inscricao_modalidade" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+
+    <script type="text/javascript">
+        $.get('{% url "dados_inscricao_campus" %}', function(data){
+            const ctx = $("#grafico_inscricao_campus").get(0).getContext("2d");
+            new Chart(ctx, {
+                type: 'bar',
+                data: data.data,
+                options: data.options,
+            });
+        });
+
+        $.get('{% url "dados_inscricao_modalidade" %}', function(data){
+            const ctx = $("#grafico_inscricao_modalidade").get(0).getContext("2d");
+            new Chart(ctx, {
+                type: 'bar',
+                data: data.data,
+                options: data.options,
+            });
+        });
+    </script>
+{% endblock %}

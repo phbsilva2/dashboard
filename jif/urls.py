@@ -42,6 +42,13 @@ from jif.views.inscricao_views import (
     InscricaoDeleteView
 )
 
+from jif.views.grafico_views import (
+    GraficoView,
+    InscricaoCampusJSONView,
+    InscricaoModalidadeJSONView,
+    InscricaoModalidadeLineJSONView
+)
+
 from .views import relatorio_views
 
 
@@ -84,4 +91,9 @@ urlpatterns = [
     path('atletatipomodalidade/', relatorio_views.atleta_tipo_modalidade, name='atleta_tipo_modalidade'),
     path('inscricoesatletas/', relatorio_views.inscricoes_atletas, name='inscricoes_atletas'),
     path('fichainscricao/<int:uo_id>/<int:modalidade_id>', relatorio_views.fichaisncricao, name='ficha_inscricao'),
+    # Gráfico URLs
+    path('grafico/', GraficoView.as_view(), name='grafico'),
+    path('dadosinscricaocampus/', InscricaoCampusJSONView.as_view(), name='dados_inscricao_campus'),
+    path('dadosinscricaomodalidade/', InscricaoModalidadeJSONView.as_view(), name='dados_inscricao_modalidade'),
+    path('dadosinscricaomodalidadeLine/', InscricaoModalidadeLineJSONView.as_view(), name='dados_inscricao_modalidadeLine'),
 ]

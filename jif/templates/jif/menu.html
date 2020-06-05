@@ -3,7 +3,7 @@
 {% block nav_top %}
 	<li class="nav-item">
 		<a class="nav-link" href="{% url 'admin:index' %}">
-			<i class="fa fa-users"></i>
+			<i class="fas fa-users"></i>
 			<span class="nav-link-text">Grupos e Usuários</span>
 		</a>
 	</li>
@@ -13,7 +13,7 @@
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
 		<a class="nav-link nav-link-collapse collapse" href="#cadastro"
 		data-toggle="collapse" data-parent="#linksaccordion">
-			<i class="fa fa-newspaper-o"></i>
+			<i class="far fa-address-card"></i>
 			<span class="nav-link-text">Cadastros</span>
 		</a>
 		<ul class="sidenav-second-level collapse" id="cadastro">
@@ -35,9 +35,15 @@
 		</ul>
 	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right">
+		<a class="nav-link" href="{% url 'inscricoes_atletas' %}">
+			<i class="fa fa-file-text-o"></i>
+			<span class="nav-link-text">Fichas de Inscrição</span>
+		</a>
+	</li>
+	<li class="nav-item" data-toggle="tooltip" data-placement="right">
 		<a class="nav-link nav-link-collapse collapse" href="#relatorio"
 		data-toggle="collapse" data-parent="#linksaccordion">
-			<i class="fa fa-copy"></i>
+			<i class="far fa-copy"></i>
 			<span class="nav-link-text">Relatórios</span>
 		</a>
 		<ul class="sidenav-second-level collapse" id="relatorio">
@@ -47,9 +53,9 @@
 		</ul>
 	</li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link" href="{% url 'inscricoes_atletas' %}">
-			<i class="fa fa-file-text-o"></i>
-			<span class="nav-link-text">Fichas de Inscrição</span>
+		<a class="nav-link" href="{% url 'grafico' %}">
+			<i class="far fa-chart-bar"></i>
+			<span class="nav-link-text">Gráficos</span>
 		</a>
 	</li>
 {% endblock %}
