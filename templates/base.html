@@ -2,78 +2,84 @@
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale = 1, shrink-to-fit=no">
+	    <meta name="viewport"
+              content="width=device-width, initial-scale = 1, shrink-to-fit=no"
+              http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta >
         <title>Sistema JIF</title>
 
         {% block stylesheets %}
             {% include '_styles.html' %}
-        {% endblock %}
+        {% endblock stylesheets %}
         {% block styles %}
-        {% endblock %}
+        {% endblock styles %}
 
     </head>
-    <body class="bg-dark fixed-nav sticky-footer">
     {% block body %}
+    <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper"
 
-        {% block nav_sidebar %}
-            {% include '_nav_sidebar.html' %}
-        {% endblock %}
+            {% block nav_sidebar %}
+                {% include '_nav_sidebar.html' %}
+            {% endblock nav_sidebar %}
 
-        {% block content_wrapper %}
-            <div class="content-wrapper">
-                {% block content_header %}
-                    <section class="content-header">
-                        {% block no_heading %}
-                            <h1>
-                                {% block page_name %}
-                                {% endblock %}
-                                <div class="header-actions">
-                                    {% block page_actions %}
-                                    {% endblock %}
-                                </div>
-                                {% block no_description %}
-                                <small>
-                                    {% block page_description %}
-                                    {% endblock %}
-                                </small>
-                                {% endblock %}
-                            </h1>
-                            {% block breadcrumbs %}
-                                {# Breadcrumb implementation left to developers #}
-                            {% endblock %}
-                        {% endblock no_heading %}
+            {% block content_wrapper %}
+                <div class="content-wrapper">
+                    {% block content_header %}
+                        <section class="content-header">
+                            {% block no_heading %}
+                                <h1>
+                                    {% block page_name %}
+                                    {% endblock page_name %}
+                                    <div class="header-actions">
+                                        {% block page_actions %}
+                                        {% endblock page_actions %}
+                                    </div>
+                                    {% block no_description %}
+                                    <small>
+                                        {% block page_description %}
+                                        {% endblock page_description %}
+                                    </small>
+                                    {% endblock no_description %}
+                                </h1>
+                                {% block breadcrumbs %}
+                                    {# Breadcrumb implementation left to developers #}
+                                {% endblock breadcrumbs %}
+                            {% endblock no_heading %}
+                        </section>
+                    {% endblock content_header %}
+
+                    {% block content_outer %}
+                    <section class="content">
+                        <div class="container-fluid">
+                        {% block messages %}
+                            {% include '_messages.html' %}
+                        {% endblock messages %}
+
+                        {% block content_block_wrap %}
+                            {% block content %}
+                                {% include '_content.html' %}
+                            {% endblock content %}
+                        {% endblock content_block_wrap %}
+                        </div>
                     </section>
-                {% endblock %}
+                    {% endblock content_outer %}
 
-                {% block content_outer %}
-                <section class="content">
-                    <div class="container-fluid">
-                    {% block messages %}
-                        {% include '_messages.html' %}
-                    {% endblock %}
-
-                    {% block content_block_wrap %}
-                        {% block content %}
-                            {% include '_content.html' %}
-                        {% endblock %}
-                    {% endblock %}
-                    </div>
-                </section>
-                {% endblock %}
-
-            </div>
+                </div>
             {% endblock content_wrapper %}
 
-        {% block nav_footer %}
-            {% include '_footer.html' %}
-        {% endblock %}
+            {% block nav_footer %}
+                {% include '_footer.html' %}
+            {% endblock nav_footer %}
 
-        {% block javascript %}
-            {% include '_scripts.html' %}
-        {% endblock %}
-        {% block scripts %}
-        {% endblock %}
+            {% block javascript %}
+                {% include '_scripts.html' %}
+            {% endblock javascript%}
+            {% block scripts %}
+            {% endblock scripts%}
 
-    {% endblock %}
+
+        </div>
     </body>
+{% endblock body%}
 </html>
