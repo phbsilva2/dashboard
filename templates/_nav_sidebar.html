@@ -9,15 +9,15 @@
 
 	<div id="navbarMenu" class="collapse navbar-collapse">
 		<ul class="navbar-nav navbar-sidenav" id="linksaccordion">
-			<div class="container text-white">
-				<div class="row justify-content-start">
-					<div class="col-3">
-						{% avatar user 45 class="rounded-circle float-left img-responsive" id="user_avatar" %}
-					</div>
-					<div class="col-3">
-						{% firstof request.user.get_short_name request.user.get_username %}
-					</div>
-				</div>
+			<div class="bg-secondary">
+				<li class="nav-item" data-placement="right">
+					<a class="nav-link text-white" href="#">
+						{% avatar user 40 class="rounded-circle float-left mb-1" id="user_avatar" %}
+						<span class="ml-1 nav-link-text">
+							{% firstof request.user.get_short_name request.user.get_username %}
+						</span>
+					</a>
+				</li>
 			</div>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right">
 				<a class="nav-link" href="{% url 'index' %}">
