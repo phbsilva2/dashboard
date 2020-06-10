@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load avatar_tags %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Usuário</li>
+        <li class="breadcrumb-item active">Alterar Avatar</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Visualizar
+        </div>
+         <div class="card-body">
+            <p>Sua imagem (avatar) atual:</p>
+            {% avatar user %}
+            {% if not avatars %}
+                <p>Você ainda não possui uma imagem (avatar). Faça o uploada de uma imagem agora.</p>
+            {% else %}
+                <form method="POST" action="{% url 'avatar_change' %}">
+                    <ul>
+                        {{ primary_avatar_form.as_ul }}
+                    </ul>
+                    <p>{% csrf_token %}<input type="submit" value="Definir como Imagem Padrão" /></p>
+                </form>
+            {% endif %}
+            <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+                {{ upload_avatar_form.as_p }}
+                <p>{% csrf_token %}<input type="submit" value="Upload de Nova Imagem" /></p>
+            </form>
+         </div>
+    </div>
+{% endblock %}

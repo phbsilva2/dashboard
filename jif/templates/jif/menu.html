@@ -10,52 +10,94 @@
 {% endblock %}
 
 {% block nav_links %}
-	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link nav-link-collapse collapse" href="#cadastro"
-		data-toggle="collapse" data-parent="#linksaccordion">
-			<i class="far fa-address-card"></i>
-			<span class="nav-link-text">Cadastros</span>
-		</a>
-		<ul class="sidenav-second-level collapse" id="cadastro">
-			{% if perms.jif.view_unidadeorganizacional %}
-			<li><a href="{% url 'unidade_organizacional_list' %}">Unidades Organizacionais</a></li>
-			{% endif %}
-			{% if perms.jif.view_tipomodalidade %}
-			<li><a href="{% url 'tipo_modalidade_list' %}">Tipos de Modalidades</a></li>
-			{% endif %}
-			{% if perms.jif.view_modalidade %}
-			<li><a href="{% url 'modalidade_list' %}">Modalidades</a></li>
-			{% endif %}
-			{% if perms.jif.view_atleta %}
-			<li><a href="{% url 'atleta_list' %}">Atletas</a></li>
-			{% endif %}
-			{% if perms.jif.view_inscricao %}
-			<li><a href="{% url 'inscricao_list' %}">Inscrições</a></li>
-			{% endif %}
-		</ul>
-	</li>
-	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link" href="{% url 'inscricoes_atletas' %}">
-			<i class="fa fa-file-text-o"></i>
-			<span class="nav-link-text">Fichas de Inscrição</span>
-		</a>
-	</li>
-	<li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link nav-link-collapse collapse" href="#relatorio"
-		data-toggle="collapse" data-parent="#linksaccordion">
-			<i class="far fa-copy"></i>
-			<span class="nav-link-text">Relatórios</span>
-		</a>
-		<ul class="sidenav-second-level collapse" id="relatorio">
-			<li><a href="{% url 'atleta_campus' %}">Atletas por Campus</a></li>
-			<li><a href="{% url 'atleta_modalidade' %}">Atletas por Modalidade</a></li>
-			<li><a href="{% url 'atleta_tipo_modalidade' %}">Atletas por Tipo de Modalidade</a></li>
-		</ul>
-	</li>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right">
-		<a class="nav-link" href="{% url 'grafico' %}">
-			<i class="far fa-chart-bar"></i>
-			<span class="nav-link-text">Gráficos</span>
-		</a>
-	</li>
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon far fa-address-card"></i>
+            <p>
+                Cadastros
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            {% if perms.jif.view_unidadeorganizacional %}
+            <li class="nav-item">
+                <a href="{% url 'unidade_organizacional_list' %}" class="nav-link">
+                    <p>Unidades Organizacionais</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_tipomodalidade %}
+            <li class="nav-item">
+                <a href="{% url 'tipo_modalidade_list' %}" class="nav-link"><p>
+                    Tipos de Modalidades</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_modalidade %}
+            <li class="nav-item">
+                <a href="{% url 'modalidade_list' %}" class="nav-link">
+                    <p>Modalidades</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_atleta %}
+            <li class="nav-item">
+                <a href="{% url 'atleta_list' %}" class="nav-link">
+                    <p>Atletas</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_inscricao %}
+            <li class="nav-item">
+                <a href="{% url 'inscricao_list' %}" class="nav-link">
+                    <p>Inscrições</p>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'inscricoes_atletas' %}" class="nav-link" >
+            <i class="nav-icon fa fa-file-text-o"></i>
+            <p>Fichas de Inscrição</p>
+        </a>
+    </li>
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon far fa-copy"></i>
+            <p>
+                Relatórios
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            {% if perms.jif.view_atleta %}
+            <li class="nav-item">
+                <a href="{% url 'atleta_campus' %}" class="nav-link">
+                    <p>Atletas por Campus</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_atleta %}
+            <li class="nav-item">
+                <a href="{% url 'atleta_modalidade' %}" class="nav-link"><p>
+                    Atletas por Modalidade</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_atleta %}
+            <li class="nav-item">
+                <a href="{% url 'atleta_tipo_modalidade' %}" class="nav-link">
+                    <p>Atletas por Tipo de Modalidades</p>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'grafico' %}" class="nav-link" >
+            <i class="nav-icon far fa-chart-bar"></i>
+            <p>Gráficos</p>
+        </a>
+    </li>
 {% endblock %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'stdimage',  # pip install django-stdimage
     'reportlab',  # pip install reportlab
     'chartjs',  # pip install django-chartjs
+    'avatar',  # pip install django-avatar
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,6 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+AVATAR_ADD_TEMPLATE = 'jif/usuario/avatar_create.html'
+AVATAR_CHANGE_TEMPLATE = 'jif/usuario/avatar_update.html'

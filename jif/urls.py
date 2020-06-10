@@ -51,6 +51,8 @@ from jif.views.grafico_views import (
 
 from .views import relatorio_views
 
+from jif.views.usuario_views import UsuarioView
+
 
 urlpatterns = [
     # Index URL
@@ -96,4 +98,6 @@ urlpatterns = [
     path('dadosinscricaocampus/', InscricaoCampusJSONView.as_view(), name='dados_inscricao_campus'),
     path('dadosinscricaomodalidade/', InscricaoModalidadeJSONView.as_view(), name='dados_inscricao_modalidade'),
     path('dadosinscricaomodalidadeLine/', InscricaoModalidadeLineJSONView.as_view(), name='dados_inscricao_modalidadeLine'),
+    # Usuário URL
+    path('usuario/', UsuarioView.as_view(), name='usuario'),
 ]
