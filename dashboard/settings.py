@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Arquivos de mídia de cada aplicação (DEBUG=True)
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 # Arquivos de mídia para ambiente de produção (DEBUG=False)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -146,3 +146,6 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 
 AVATAR_ADD_TEMPLATE = 'jif/usuario/avatar_create.html'
 AVATAR_CHANGE_TEMPLATE = 'jif/usuario/avatar_update.html'
+AVATAR_ALLOWED_FILE_EXTS = ('.jpg', '.png')
+AVATAR_MAX_SIZE = 1024 * 1024
+AVATAR_MAX_AVATARS_PER_USER = 5

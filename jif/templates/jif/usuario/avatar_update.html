@@ -8,7 +8,7 @@
 {% block breadcrumbs %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
-        <li class="breadcrumb-item">Usuário</li>
+        <li class="breadcrumb-item"><a href="{% url 'usuario' %}">Usuário</a></li>
         <li class="breadcrumb-item active">Alterar Avatar</li>
     </ol>
 {% endblock %}
@@ -22,18 +22,18 @@
             <p>Sua imagem (avatar) atual:</p>
             {% avatar user %}
             {% if not avatars %}
-                <p>Você ainda não possui uma imagem (avatar). Faça o uploada de uma imagem agora.</p>
+                <p class="mt-2">Você ainda não possui uma imagem (avatar). Faça o upload de uma imagem.</p>
             {% else %}
-                <form method="POST" action="{% url 'avatar_change' %}">
+                <form class="mt-2" method="POST" action="{% url 'avatar_change' %}">
                     <ul>
                         {{ primary_avatar_form.as_ul }}
                     </ul>
-                    <p>{% csrf_token %}<input type="submit" value="Definir como Imagem Padrão" /></p>
+                    <p>{% csrf_token %}<input type="submit" class="btn btn-primary btn-sm" value="Definir como Imagem Padrão" /></p>
                 </form>
             {% endif %}
-            <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+            <form class="mt-2" enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
                 {{ upload_avatar_form.as_p }}
-                <p>{% csrf_token %}<input type="submit" value="Upload de Nova Imagem" /></p>
+                <p>{% csrf_token %}<input type="submit" class="btn btn-primary btn-sm" value="Upload da Nova Imagem" /></p>
             </form>
          </div>
     </div>
