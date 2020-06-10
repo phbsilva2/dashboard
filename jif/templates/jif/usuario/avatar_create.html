@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load avatar_tags %}
+{% load static %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Usuário</li>
+        <li class="breadcrumb-item active">Adicionar Avatar</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Avatar
+        </div>
+         <div class="card-body">
+            <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+                {{ upload_avatar_form.as_p }}
+                <p>{% csrf_token %}<input type="submit" value="Upload da Nova Imagem" /></p>
+            </form>
+         </div>
+    </div>
+{% endblock %}

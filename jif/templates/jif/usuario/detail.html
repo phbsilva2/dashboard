@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load avatar_tags %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Usuário</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Visualizar
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>
+                            <span>Nome Usuário:</span>
+                        </th>
+                        <td>
+                            <span>{{ user.username }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>Nome Completo:</span>
+                        </th>
+                        <td>
+                            <span>{{ user.get_full_name }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>E-mail:</span>
+                        </th>
+                        <td>
+                            <span>{{ user.email }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>Grupos do Usuário:</span>
+                        </th>
+                        <td>
+                            <span>{{ user.groups.all.0 }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>Avatar:</span>
+                        </th>
+                        <td>
+                            <div>
+                                <p>Sua imagem (avatar) atual:</p>
+                                <div class="image">
+                                    {% avatar user %}
+                                </div>
+                                <div>
+                                {% if not avatars %}
+                                    <p>Você ainda não possui uma imagem (avatar). Faça o uploada de uma imagem agora.</p>
+                                    <a href="{% url 'avatar_add' %}">Cadastrar Imagem</a>
+                                {% else %}
+                                    <a href="{% url 'avatar_change' %}">Alterar Imagem</a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>Início da Sessão:</span>
+                        </th>
+                        <td>
+                            <span>{{ user.last_login }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
