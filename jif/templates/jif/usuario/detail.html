@@ -8,7 +8,7 @@
 {% block breadcrumbs %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
-        <li class="breadcrumb-item">Usuário</li>
+        <li class="breadcrumb-item active">Usuário</li>
     </ol>
 {% endblock %}
 
@@ -21,7 +21,7 @@
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <th>
+                        <th style="width:190px">
                             <span>Nome Usuário:</span>
                         </th>
                         <td>
@@ -62,14 +62,7 @@
                                 <div class="image">
                                     {% avatar user %}
                                 </div>
-                                <div>
-                                {% if not avatars %}
-                                    <p>Você ainda não possui uma imagem (avatar). Faça o uploada de uma imagem agora.</p>
-                                    <a href="{% url 'avatar_add' %}">Cadastrar Imagem</a>
-                                {% else %}
-                                    <a href="{% url 'avatar_change' %}">Alterar Imagem</a>
-                                {% endif %}
-                                </div>
+                                <a class="btn btn-primary btn-sm mt-2" href="{% url 'avatar_change' %}">Alterar Imagem</a>
                             </div>
                         </td>
                     </tr>
