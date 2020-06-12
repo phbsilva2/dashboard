@@ -2,6 +2,54 @@ from django.urls import path
 
 from jif.views.index_views import IndexView
 
+from jif.views.instituto_views import (
+    InstitutoView,
+    InstitutoCreateView,
+    InstitutoDetailView,
+    InstitutoUpdateView,
+    InstitutoDeleteView
+)
+
+from jif.views.campus_views import (
+    CampusView,
+    CampusCreateView,
+    CampusDetailView,
+    CampusUpdateView,
+    CampusDeleteView
+)
+
+from jif.views.edicao_views import (
+    EdicaoView,
+    EdicaoCreateView,
+    EdicaoDetailView,
+    EdicaoUpdateView,
+    EdicaoDeleteView
+)
+
+from jif.views.categoria_views import (
+    CategoriaView,
+    CategoriaCreateView,
+    CategoriaDetailView,
+    CategoriaUpdateView,
+    CategoriaDeleteView
+)
+
+from jif.views.prova_views import (
+    ProvaView,
+    ProvaCreateView,
+    ProvaDetailView,
+    ProvaUpdateView,
+    ProvaDeleteView
+)
+
+from jif.views.etapa_views import (
+    EtapaView,
+    EtapaCreateView,
+    EtapaDetailView,
+    EtapaUpdateView,
+    EtapaDeleteView
+)
+
 from jif.views.unidade_organizacional_views import (
     UnidadeOrganizacionalView,
     UnidadeOrganizacionalCreateView,
@@ -57,6 +105,42 @@ from jif.views.usuario_views import UsuarioView
 urlpatterns = [
     # Index URL
     path('', IndexView.as_view(), name='index'),
+    # Instituto URLs
+    path('instituto/', InstitutoView.as_view(), name='instituto_list'),
+    path('instituto_create/', InstitutoCreateView.as_view()),
+    path('instituto/<pk>/', InstitutoDetailView.as_view()),
+    path('instituto/<pk>/update', InstitutoUpdateView.as_view()),
+    path('instituto/<pk>/delete/', InstitutoDeleteView.as_view()),
+    # Campus URLs
+    path('campus/', CampusView.as_view(), name='campus_list'),
+    path('campus_create/', CampusCreateView.as_view()),
+    path('campus/<pk>/', CampusDetailView.as_view()),
+    path('campus/<pk>/update', CampusUpdateView.as_view()),
+    path('campus/<pk>/delete/', CampusDeleteView.as_view()),
+    # Edicao URLs
+    path('edicao/', EdicaoView.as_view(), name='edicao_list'),
+    path('edicao_create/', EdicaoCreateView.as_view()),
+    path('edicao/<pk>/', EdicaoDetailView.as_view()),
+    path('edicao/<pk>/update', EdicaoUpdateView.as_view()),
+    path('edicao/<pk>/delete/', EdicaoDeleteView.as_view()),
+    # Categoria URLs
+    path('categoria/', CategoriaView.as_view(), name='categoria_list'),
+    path('categoria_create/', CategoriaCreateView.as_view()),
+    path('categoria/<pk>/', CategoriaDetailView.as_view()),
+    path('categoria/<pk>/update', CategoriaUpdateView.as_view()),
+    path('categoria/<pk>/delete/', CategoriaDeleteView.as_view()),
+    # Prova URLs
+    path('prova/', ProvaView.as_view(), name='prova_list'),
+    path('prova_create/', ProvaCreateView.as_view()),
+    path('prova/<pk>/', ProvaDetailView.as_view()),
+    path('prova/<pk>/update', ProvaUpdateView.as_view()),
+    path('prova/<pk>/delete/', ProvaDeleteView.as_view()),
+    # Etapa URLs
+    path('etapa/', EtapaView.as_view(), name='etapa_list'),
+    path('etapa_create/', EtapaCreateView.as_view()),
+    path('etapa/<pk>/', EtapaDetailView.as_view()),
+    path('etapa/<pk>/update', EtapaUpdateView.as_view()),
+    path('etapa/<pk>/delete/', EtapaDeleteView.as_view()),
     # Unidade Organizacional URLs
     path('unidadeorganizacional/', UnidadeOrganizacionalView.as_view(), name='unidade_organizacional_list'),
     path('unidadeorganizacional_create/', UnidadeOrganizacionalCreateView.as_view()),
