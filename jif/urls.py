@@ -50,14 +50,6 @@ from jif.views.etapa_views import (
     EtapaDeleteView
 )
 
-from jif.views.tipo_modalidade_views import (
-    TipoModalidadeView,
-    TipoModalidadeCreateView,
-    TipoModalidadeDetailView,
-    TipoModalidadeUpdateView,
-    TipoModalidadeDeleteView
-)
-
 from jif.views.modalidade_views import (
     ModalidadeView,
     ModalidadeCreateView,
@@ -133,12 +125,6 @@ urlpatterns = [
     path('etapa/<pk>/', EtapaDetailView.as_view()),
     path('etapa/<pk>/update', EtapaUpdateView.as_view()),
     path('etapa/<pk>/delete/', EtapaDeleteView.as_view()),
-    # Tipo de Modalidade URLs
-    path('tipomodalidade/', TipoModalidadeView.as_view(), name='tipo_modalidade_list'),
-    path('tipomodalidade_create/', TipoModalidadeCreateView.as_view()),
-    path('tipomodalidade/<pk>/', TipoModalidadeDetailView.as_view()),
-    path('tipomodalidade/<pk>/update', TipoModalidadeUpdateView.as_view()),
-    path('tipomodalidade/<pk>/delete/', TipoModalidadeDeleteView.as_view()),
     # Modalidade URLs
     path('modalidade/', ModalidadeView.as_view(), name='modalidade_list'),
     path('modalidade_create/', ModalidadeCreateView.as_view()),
