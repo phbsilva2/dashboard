@@ -26,13 +26,6 @@
                 </a>
             </li>
             {% endif %}
-            {% if perms.jif.view_tipomodalidade %}
-            <li class="nav-item">
-                <a href="{% url 'tipo_modalidade_list' %}" class="nav-link"><p>
-                    Tipos de Modalidades</p>
-                </a>
-            </li>
-            {% endif %}
             {% if perms.jif.view_modalidade %}
             <li class="nav-item">
                 <a href="{% url 'modalidade_list' %}" class="nav-link">
