@@ -10,7 +10,7 @@ import io
 import os.path
 
 
-def inscricao_pdf(unidade_organizacional_nome, modalidade_nome, inscricoes=[]):
+def inscricao_pdf(instituto_nome, modalidade_nome, inscricoes=[]):
 
     cabecalho = ['Nome do Atleta', 'Data Nasc.', 'RG', 'Matrícula']
 
@@ -78,7 +78,7 @@ def inscricao_pdf(unidade_organizacional_nome, modalidade_nome, inscricoes=[]):
     elems.append(Spacer(1, 0.3 * inch))
     elems.append(Paragraph('IFB - Instituto Federal de Educação, Ciência e Tecnologia de Brasília', styles["Normal"]))
     elems.append(Spacer(1, 0.2 * inch))
-    elems.append(Paragraph("<h2>Unidade Organizacional: <b>%s</b></h2>" % (unidade_organizacional_nome), normal))
+    elems.append(Paragraph("<h2>Unidade Organizacional: <b>%s</b></h2>" % (instituto_nome), normal))
     elems.append(Paragraph("<h2>Modalidade: <b>%s</b></h2>" % (modalidade_nome), normal))
     elems.append(Spacer(1, 0.2 * inch))
     elems.append(table)

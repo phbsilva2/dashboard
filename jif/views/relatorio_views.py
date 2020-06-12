@@ -21,12 +21,12 @@ def atleta_campus(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            if form.cleaned_data['unidade_organizacional']:
-                unidade_organizacional_id = form.cleaned_data['unidade_organizacional'].pk
-                inscricoes = Inscricao.objects.filter(unidade_organizacional__pk=unidade_organizacional_id).order_by('atleta__nome')
+            if form.cleaned_data['instituto']:
+                instituto_id = form.cleaned_data['instituto'].pk
+                inscricoes = Inscricao.objects.filter(instituto__pk=instituto_id).order_by('atleta__nome')
                 mostrar_campus = False
             else:
-                inscricoes = Inscricao.objects.all().order_by('unidade_organizacional__nome', 'atleta__nome')
+                inscricoes = Inscricao.objects.all().order_by('instituto__nome', 'atleta__nome')
                 mostrar_campus = True
 
             return render(request, 'jif/relatorio/atletacampus.html',
@@ -93,15 +93,15 @@ def inscricoes_atletas(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            unidade_organizacional_id = form.cleaned_data['unidade_organizacional'].pk
+            instituto_id = form.cleaned_data['instituto'].pk
             modalidade_id = form.cleaned_data['modalidade'].pk
 
-            inscricoes = Inscricao.objects.filter(unidade_organizacional__pk=unidade_organizacional_id, modalidade__pk=modalidade_id)
+            inscricoes = Inscricao.objects.filter(instituto__pk=instituto_id, modalidade__pk=modalidade_id)
 
             return render(request, 'jif/relatorio/inscricoesatletas.html',
                           {'form': form,
                            'inscricoes': inscricoes,
-                           'uo': unidade_organizacional_id,
+                           'uo': instituto_id,
                            'modalidade': modalidade_id})
     else:
         form = RelatorioInscricoesForm()
@@ -117,7 +117,7 @@ def fichaisncricao(request, uo_id, modalidade_id):
     uo_nome = ""
     modalidade_nome = ""
 
-    inscricoes = Inscricao.objects.filter(unidade_organizacional__pk=uo_id, modalidade__pk=modalidade_id)
+    inscricoes = Inscricao.objects.filter(instituto__pk=uo_id, modalidade__pk=modalidade_id)
     if inscricoes:
         for inscr in inscricoes:
             dados_inscrito = []
@@ -129,7 +129,7 @@ def fichaisncricao(request, uo_id, modalidade_id):
             dados_inscrito.append(str(inscr.atleta.rg))
             dados_inscrito.append(str(inscr.atleta.matricula))
             if not uo_nome:
-                uo_nome = inscr.unidade_organizacional.nome
+                uo_nome = inscr.instituto.nome
             if not modalidade_nome:
                 modalidade_nome = inscr.modalidade.nome
 

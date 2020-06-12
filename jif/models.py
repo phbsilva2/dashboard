@@ -249,7 +249,7 @@ class Inscricao(models.Model):
     objects = models.Manager()
 
     class Meta:
-        unique_together = ['modalidade', 'atleta', 'unidade_organizacional']
+        unique_together = ['atleta', 'etapa', 'edicao_prova']
         verbose_name = 'Inscrição'
         verbose_name_plural = 'Inscrições'
 

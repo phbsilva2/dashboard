@@ -30,7 +30,7 @@ class InscricaoDetailView(PermissionRequiredMixin, DetailView):
 
 class InscricaoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Inscricao
-    fields = ["modalidade", "atleta", "unidade_organizacional"]
+    fields = ["modalidade", "atleta", "campus"]
     permission_required = 'jif.add_inscricao'
     template_name = 'jif/inscricao/form.html'
     success_message = "A inscrição do atleta '%(atleta)s' foi realizada com sucesso!"
@@ -39,7 +39,7 @@ class InscricaoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateVi
 
 class InscricaoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Inscricao
-    fields = ["modalidade", "atleta", "unidade_organizacional"]
+    fields = ["modalidade", "atleta", "campus"]
     permission_required = 'jif.change_inscricao'
     template_name = 'jif/inscricao/form.html'
     context_object_name = 'inscricao'

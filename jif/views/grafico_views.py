@@ -18,17 +18,17 @@ class InscricaoCampusMixin(object):
 
     def get_providers(self):
         datasets = []
-        inscricoes = Inscricao.objects.all().values('unidade_organizacional__nome').annotate(
-            total=Count('unidade_organizacional__nome')).order_by('unidade_organizacional__nome')
+        inscricoes = Inscricao.objects.all().values('campus__nome').annotate(
+            total=Count('campus__nome')).order_by('campus__nome')
 
         for inscricao in inscricoes:
-            datasets.append(inscricao['unidade_organizacional__nome'])
+            datasets.append(inscricao['campus__nome'])
         return datasets
 
     def get_data(self):
         dados = []
-        inscricoes = Inscricao.objects.all().values('unidade_organizacional__nome').annotate(
-            total=Count('unidade_organizacional__nome')).order_by('unidade_organizacional__nome')
+        inscricoes = Inscricao.objects.all().values('campus__nome').annotate(
+            total=Count('campus__nome')).order_by('campus__nome')
 
         for inscricao in inscricoes:
             dados.append([inscricao['total']])

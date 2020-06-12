@@ -19,10 +19,10 @@
             </p>
         </a>
         <ul class="nav nav-treeview">
-            {% if perms.jif.view_unidadeorganizacional %}
+            {% if perms.jif.view_instituto %}
             <li class="nav-item">
-                <a href="{% url 'unidade_organizacional_list' %}" class="nav-link">
-                    <p>Unidades Organizacionais</p>
+                <a href="{% url 'instituto_list' %}" class="nav-link">
+                    <p>Institutos</p>
                 </a>
             </li>
             {% endif %}
