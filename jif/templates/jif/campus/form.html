@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+	{% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item"><a href="{% url 'campus_list' %}">Campus</a></li>
+        {% if campus %}
+        <li class="breadcrumb-item active">Editar</li>
+        {% else %}
+        <li class="breadcrumb-item active">Adicionar</li>
+        {% endif %}
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            {% if campus %}
+            Editar {{campus.get_verbose_name}}
+            {% else %}
+            Adicionar Unidade Organizacional
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% if campus %}
+                <p>Você está editando '{{ campus.nome }}' </p>
+                {% endif %}
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="box-tools pull-left">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Salvar">
+                    <a href="{% url 'campus_list' %}" class="btn btn-primary btn-sm">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
