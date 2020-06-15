@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item active">{{edicao.get_verbose_name}}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            {{edicao.get_verbose_name_plural}}
+            <div class="box-tools pull-right">
+                {% if perms.jif.add_edicao %}
+                <a href="/edicao_create/" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar {{edicao.get_verbose_name}}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for edic in edicoes %}
+                    <tr class="row1">
+                        <td style="width:70px">
+                            {% if perms.jif.view_edicao %}
+                            <a href="/edicao/{{edic.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.change_edicao %}
+                            <a href="/edicao/{{edic.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.delete_edicao %}
+                            <a href="/edicao/{{edic.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{edic.nome}}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
