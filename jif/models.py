@@ -2,7 +2,16 @@ from django.db import models
 from stdimage.models import StdImageField
 
 
-class Instituto(models.Model):
+class Base(models.Model):
+    data_criacao = models.DateField('Data da Criação', auto_now_add=True)
+    data_alteracao = models.DateField('Data da Alteração', auto_now=True)
+    ativo = models.BooleanField('Ativo', default=True)
+
+    class Meta:
+        abstract = True
+
+
+class Instituto(Base):
     nome = models.CharField(max_length=100, unique=True)
     sigla = models.CharField(max_length=10, unique=True)
 
@@ -20,7 +29,7 @@ class Instituto(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Campus(models.Model):
+class Campus(Base):
     nome = models.CharField(max_length=100, unique=True)
     instituto = models.ForeignKey(Instituto, on_delete=models.CASCADE, verbose_name='Instituto')
 
@@ -38,7 +47,7 @@ class Campus(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Edicao(models.Model):
+class Edicao(Base):
     nome = models.CharField(max_length=100, unique=True)
     data_inicio_edicao = models.DateField('Data do Início da Edição', blank=False, null=False)
     data_termino_edicao = models.DateField('Data do Término da Edição', blank=False, null=False)
@@ -57,7 +66,7 @@ class Edicao(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Etapa(models.Model):
+class Etapa(Base):
     nome = models.CharField(max_length=100, unique=True)
     data_inicio_etapa = models.DateField('Data do Início da Etapa', blank=False, null=False)
     data_termino_etapa = models.DateField('Data do Término da Etapa', blank=False, null=False)
@@ -96,7 +105,7 @@ class EdicaoCampus(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Categoria(models.Model):
+class Categoria(Base):
     nome = models.CharField(max_length=100, unique=True)
     idade_minima = models.IntegerField('Idade Mínima', blank=True, null=True)
     idade_maxima = models.IntegerField('Idade Máxima', blank=True, null=True)
@@ -134,7 +143,7 @@ class EdicaoCategoria(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Modalidade(models.Model):
+class Modalidade(Base):
     nome = models.CharField(max_length=100, unique=True)
     tipo = models.CharField(max_length=1, choices=[['I', 'Individual'], ['C', 'Coletivo']])
 
@@ -172,7 +181,7 @@ class EdicaoModalidade(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Prova(models.Model):
+class Prova(Base):
     nome = models.CharField(max_length=100, unique=True)
     modalidade = models.ForeignKey(Modalidade, on_delete=models.CASCADE, verbose_name='Modalidade')
 
@@ -211,7 +220,7 @@ class EdicaoModalidadeProva(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Atleta(models.Model):
+class Atleta(Base):
     nome = models.CharField(max_length=100)
     foto = StdImageField(upload_to='atletas', variations={'thumb': (124, 124)},
                          blank=True)  # TODO Aperfeiçoar parâmetros: https://pypi.org/project/django-stdimage/
@@ -240,7 +249,7 @@ class Atleta(models.Model):
         return self._meta.verbose_name_plural
 
 
-class Inscricao(models.Model):
+class Inscricao(Base):
     atleta = models.ForeignKey(Atleta, on_delete=models.CASCADE, verbose_name='Atleta')
     campus = models.ForeignKey(Campus, on_delete=models.CASCADE, verbose_name='Campus')
     etapa = models.ForeignKey(Etapa, on_delete=models.CASCADE, verbose_name='Etapa')
