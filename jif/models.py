@@ -3,8 +3,8 @@ from stdimage.models import StdImageField
 
 
 class Base(models.Model):
-    data_criacao = models.DateField('Data da Criação', auto_now_add=True)
-    data_alteracao = models.DateField('Data da Alteração', auto_now=True)
+    data_hora_cadastro = models.DateTimeField('Data do Cadastro', auto_now_add=True)
+    data_hora_ultima_alteracao = models.DateTimeField('Data da Última Alteração', auto_now=True)
     ativo = models.BooleanField('Ativo', default=True)
 
     class Meta:
