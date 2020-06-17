@@ -96,7 +96,7 @@ urlpatterns = [
     path('instituto/<pk>/update', InstitutoUpdateView.as_view()),
     path('instituto/<pk>/delete/', InstitutoDeleteView.as_view()),
     # Campus URLs
-    path('campus/', CampusView.as_view(), name='campus_list'),
+    path('campus/', CampusView.as_view(), name='campus'),
     path('campus_create/', CampusCreateView.as_view()),
     path('campus/<pk>/', CampusDetailView.as_view()),
     path('campus/<pk>/update', CampusUpdateView.as_view()),

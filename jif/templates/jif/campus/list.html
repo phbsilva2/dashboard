@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item active">{{campus.get_verbose_name}}</li>
+        <li class="breadcrumb-item active">{{campus.get_verbose_name_plural}}</li>
     </ol>
 {% endblock %}
 
@@ -31,24 +31,36 @@
                     <tr>
                         <th></th>
                         <th>Nome</th>
+                        <th>Instituto</th>
+                        <th>Ativo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for camp in campi %}
+                    {% for item in campi %}
                     <tr class="row1">
                         <td style="width:70px">
                             {% if perms.jif.view_campus %}
-                            <a href="/campus/{{camp.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            <a href="/campus/{{item.id}}" title="Visualizar"><i class="fa fa-eye text-info mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.change_campus %}
-                            <a href="/campus/{{camp.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            <a href="/campus/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_campus %}
-                            <a href="/campus/{{camp.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            <a href="/campus/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
                             {% endif %}
                         </td>
                         <td>
-                            <span>{{camp.nome}}</span>
+                            <span>{{item.nome}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.instituto}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

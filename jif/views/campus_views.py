@@ -30,7 +30,7 @@ class CampusDetailView(PermissionRequiredMixin, DetailView):
 
 class CampusCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Campus
-    fields = ["nome"]
+    fields = ["nome", "instituto", "ativo"]
     permission_required = 'jif.add_campus'
     template_name = 'jif/campus/form.html'
     success_message = "'%(nome)s' foi adicionado com sucesso!"
@@ -39,7 +39,7 @@ class CampusCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView)
 
 class CampusUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Campus
-    fields = ["nome"]
+    fields = ["nome", "instituto", "ativo"]
     permission_required = 'jif.change_campus'
     template_name = 'jif/campus/form.html'
     context_object_name = 'campus'
