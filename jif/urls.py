@@ -90,7 +90,7 @@ urlpatterns = [
     # Index URL
     path('', IndexView.as_view(), name='index'),
     # Instituto URLs
-    path('instituto/', InstitutoView.as_view(), name='instituto_list'),
+    path('instituto/', InstitutoView.as_view(), name='instituto'),
     path('instituto_create/', InstitutoCreateView.as_view()),
     path('instituto/<pk>/', InstitutoDetailView.as_view()),
     path('instituto/<pk>/update', InstitutoUpdateView.as_view()),

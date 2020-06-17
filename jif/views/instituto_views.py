@@ -30,7 +30,7 @@ class InstitutoDetailView(PermissionRequiredMixin, DetailView):
 
 class InstitutoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Instituto
-    fields = ["nome"]
+    fields = ["nome", "sigla", "ativo"]
     permission_required = 'jif.add_instituto'
     template_name = 'jif/instituto/form.html'
     success_message = "'%(nome)s' foi adicionado com sucesso!"
@@ -39,7 +39,7 @@ class InstitutoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateVi
 
 class InstitutoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Instituto
-    fields = ["nome"]
+    fields = ["nome", "sigla", "ativo"]
     permission_required = 'jif.change_instituto'
     template_name = 'jif/instituto/form.html'
     context_object_name = 'instituto'
