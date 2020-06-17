@@ -108,7 +108,7 @@ urlpatterns = [
     path('edicao/<pk>/update', EdicaoUpdateView.as_view()),
     path('edicao/<pk>/delete/', EdicaoDeleteView.as_view()),
     # Categoria URLs
-    path('categoria/', CategoriaView.as_view(), name='categoria_list'),
+    path('categoria/', CategoriaView.as_view(), name='categoria'),
     path('categoria_create/', CategoriaCreateView.as_view()),
     path('categoria/<pk>/', CategoriaDetailView.as_view()),
     path('categoria/<pk>/update', CategoriaUpdateView.as_view()),

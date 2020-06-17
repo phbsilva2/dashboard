@@ -30,7 +30,7 @@ class CategoriaDetailView(PermissionRequiredMixin, DetailView):
 
 class CategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Categoria
-    fields = ["nome"]
+    fields = ["nome", "idade_minima", "idade_maxima"]
     permission_required = 'jif.add_categoria'
     template_name = 'jif/categoria/form.html'
     success_message = "'%(nome)s' foi adicionado com sucesso!"
@@ -39,7 +39,7 @@ class CategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateVi
 
 class CategoriaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Categoria
-    fields = ["nome"]
+    fields = ["nome", "idade_minima", "idade_maxima"]
     permission_required = 'jif.change_categoria'
     template_name = 'jif/categoria/form.html'
     context_object_name = 'categoria'
