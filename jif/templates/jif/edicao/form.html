@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'edicao_list' %}">Edição</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'edicao' %}">Edições</a></li>
         {% if edicao %}
         <li class="breadcrumb-item active">Editar</li>
         {% else %}
@@ -23,7 +23,7 @@
             {% if edicao %}
             Editar {{edicao.get_verbose_name}}
             {% else %}
-            Adicionar Unidade Organizacional
+            Edição
             {% endif %}
         </div>
         <div class="card-body">
@@ -35,7 +35,7 @@
                 {{ form.as_p }}
                 <div class="box-tools pull-left">
                     <input type="submit" class="btn btn-primary btn-sm" value="Salvar">
-                    <a href="{% url 'edicao_list' %}" class="btn btn-primary btn-sm">Cancelar</a>
+                    <a href="{% url 'edicao' %}" class="btn btn-primary btn-sm">Cancelar</a>
                 </div>
             </form>
         </div>

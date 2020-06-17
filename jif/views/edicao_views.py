@@ -30,7 +30,7 @@ class EdicaoDetailView(PermissionRequiredMixin, DetailView):
 
 class EdicaoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Edicao
-    fields = ["nome"]
+    fields = ["nome", "data_inicio_edicao", "data_termino_edicao"]
     permission_required = 'jif.add_edicao'
     template_name = 'jif/edicao/form.html'
     success_message = "'%(nome)s' foi adicionado com sucesso!"
@@ -39,7 +39,7 @@ class EdicaoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView)
 
 class EdicaoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Edicao
-    fields = ["nome"]
+    fields = ["nome", "data_inicio_edicao", "data_termino_edicao"]
     permission_required = 'jif.change_edicao'
     template_name = 'jif/edicao/form.html'
     context_object_name = 'edicao'

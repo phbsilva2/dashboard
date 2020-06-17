@@ -102,7 +102,7 @@ urlpatterns = [
     path('campus/<pk>/update', CampusUpdateView.as_view()),
     path('campus/<pk>/delete/', CampusDeleteView.as_view()),
     # Edicao URLs
-    path('edicao/', EdicaoView.as_view(), name='edicao_list'),
+    path('edicao/', EdicaoView.as_view(), name='edicao'),
     path('edicao_create/', EdicaoCreateView.as_view()),
     path('edicao/<pk>/', EdicaoDetailView.as_view()),
     path('edicao/<pk>/update', EdicaoUpdateView.as_view()),
