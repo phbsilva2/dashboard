@@ -120,7 +120,7 @@ urlpatterns = [
     path('prova/<pk>/update', ProvaUpdateView.as_view()),
     path('prova/<pk>/delete/', ProvaDeleteView.as_view()),
     # Etapa URLs
-    path('etapa/', EtapaView.as_view(), name='etapa_list'),
+    path('etapa/', EtapaView.as_view(), name='etapa'),
     path('etapa_create/', EtapaCreateView.as_view()),
     path('etapa/<pk>/', EtapaDetailView.as_view()),
     path('etapa/<pk>/update', EtapaUpdateView.as_view()),

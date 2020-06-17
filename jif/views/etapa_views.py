@@ -30,7 +30,7 @@ class EtapaDetailView(PermissionRequiredMixin, DetailView):
 
 class EtapaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Etapa
-    fields = ["nome"]
+    fields = ["nome", "data_inicio_etapa", "data_termino_etapa", "data_inicio_inscricao", "data_termino_inscricao"]
     permission_required = 'jif.add_etapa'
     template_name = 'jif/etapa/form.html'
     success_message = "'%(nome)s' foi adicionado com sucesso!"
@@ -39,7 +39,7 @@ class EtapaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
 
 class EtapaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Etapa
-    fields = ["nome"]
+    fields = ["nome", "data_inicio_etapa", "data_termino_etapa", "data_inicio_inscricao", "data_termino_inscricao"]
     permission_required = 'jif.change_etapa'
     template_name = 'jif/etapa/form.html'
     context_object_name = 'etapa'

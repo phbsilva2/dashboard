@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item active">{{etapa.get_verbose_name}}</li>
+        <li class="breadcrumb-item active">{{etapa.get_verbose_name_plural}}</li>
     </ol>
 {% endblock %}
 
@@ -31,24 +31,48 @@
                     <tr>
                         <th></th>
                         <th>Nome</th>
+                        <th>Início da Etapa</th>
+                        <th>Término da Etapa</th>
+                        <th>Início das Inscrições</th>
+                        <th>Término das Inscrições</th>
+                        <th>Ativo</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in etapas %}
-                    <tr class="row1">
+                    <tr>
                         <td style="width:70px">
                             {% if perms.jif.view_etapa %}
-                            <a href="/etapa/{{item.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            <a href="/etapa/{{item.id}}" title="Visualizar"><i class="fa fa-eye text-info mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.change_etapa %}
-                            <a href="/etapa/{{item.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            <a href="/etapa/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_etapa %}
-                            <a href="/etapa/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            <a href="/etapa/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
                             {% endif %}
                         </td>
                         <td>
                             <span>{{item.nome}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_inicio_etapa}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_termino_etapa}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_inicio_inscricao}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_termino_inscricao}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
