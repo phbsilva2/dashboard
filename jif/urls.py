@@ -114,7 +114,7 @@ urlpatterns = [
     path('categoria/<pk>/update', CategoriaUpdateView.as_view()),
     path('categoria/<pk>/delete/', CategoriaDeleteView.as_view()),
     # Prova URLs
-    path('prova/', ProvaView.as_view(), name='prova_list'),
+    path('prova/', ProvaView.as_view(), name='prova'),
     path('prova_create/', ProvaCreateView.as_view()),
     path('prova/<pk>/', ProvaDetailView.as_view()),
     path('prova/<pk>/update', ProvaUpdateView.as_view()),

@@ -30,7 +30,7 @@ class ProvaDetailView(PermissionRequiredMixin, DetailView):
 
 class ProvaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Prova
-    fields = ["nome"]
+    fields = ["nome", "modalidade"]
     permission_required = 'jif.add_prova'
     template_name = 'jif/prova/form.html'
     success_message = "'%(nome)s' foi adicionado com sucesso!"
@@ -39,7 +39,7 @@ class ProvaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
 
 class ProvaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Prova
-    fields = ["nome"]
+    fields = ["nome", "modalidade"]
     permission_required = 'jif.change_prova'
     template_name = 'jif/prova/form.html'
     context_object_name = 'prova'
