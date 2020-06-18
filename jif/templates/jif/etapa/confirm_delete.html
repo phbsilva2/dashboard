@@ -21,7 +21,7 @@
          <div class="card-body">
             <form method="post">
                 {% csrf_token %}
-                <p>Você tem certeza que deseja excluir '{{ etapa.nome }}' ?</p>
+                <p>Você tem certeza que deseja excluir a etapa '{{ etapa.nome }}' da edição '{{ etapa.edicao }}' ?</p>
                 <div class="box-tools pull-left">
                     <input type="submit" class="btn btn-danger btn-sm" value="Excluir">
                     <a href="{% url 'etapa' %}" class="btn btn-primary btn-sm">Cancelar</a>

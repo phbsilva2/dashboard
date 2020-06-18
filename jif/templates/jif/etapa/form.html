@@ -29,7 +29,7 @@
         <div class="card-body">
             <form method="post">
                 {% if etapa %}
-                <p>Você está editando '{{ etapa.nome }}' </p>
+                <p>Você está editando '{{ etapa.nome }}' da edição '{{ etapa.edição }}' </p>
                 {% endif %}
                 {% csrf_token %}
                 {{ form.as_p }}

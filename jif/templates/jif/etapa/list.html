@@ -30,6 +30,7 @@
                 <thead>
                     <tr>
                         <th></th>
+                        <th>Edição</th>
                         <th>Nome</th>
                         <th>Início da Etapa</th>
                         <th>Término da Etapa</th>
@@ -51,6 +52,9 @@
                             {% if perms.jif.delete_etapa %}
                             <a href="/etapa/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
                             {% endif %}
+                        </td>
+                        <td>
+                            <span>{{item.edicao}}</span>
                         </td>
                         <td>
                             <span>{{item.nome}}</span>

@@ -67,11 +67,13 @@ class Edicao(Base):
 
 
 class Etapa(Base):
+    edicao = models.ForeignKey(Edicao, on_delete=models.CASCADE, verbose_name='Edição')
     nome = models.CharField(max_length=100, unique=True)
     data_inicio_etapa = models.DateField('Data do Início da Etapa', blank=False, null=False)
     data_termino_etapa = models.DateField('Data do Término da Etapa', blank=False, null=False)
     data_inicio_inscricao = models.DateField('Data do Início das Inscrições', blank=False, null=False)
     data_termino_inscricao = models.DateField('Data do Término das Inscrições', blank=False, null=False)
+    campi = models.ManyToManyField(Campus)
 
     class Meta:
         verbose_name = 'Etapa'
