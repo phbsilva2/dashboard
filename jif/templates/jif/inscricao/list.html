@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item active">{{inscricao.get_verbose_name}}</li>
+        <li class="breadcrumb-item active">{{inscricao.get_verbose_name_plural}}</li>
     </ol>
 {% endblock %}
 
@@ -30,37 +30,48 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Inscrição</th>
-                        <th>Modalidade</th>
+                        <th>Número</th>
                         <th>Atleta</th>
-                        <th>Unidade Organizacinal</th>
+                        <th>Campus</th>
+                        <th>Etapa</th>
+                        <th>Prova</th>
+                        <th>Ativo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in inscricoes %}
-                    <tr class="row1">
+                    {% for item in inscricoes %}
+                    <tr>
                         <td style="width:70px">
                             {% if perms.jif.view_inscricao %}
-                            <a href="/inscricao/{{i.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            <a href="/inscricao/{{item.id}}" title="Visualizar"><i class="fa fa-eye text-info mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.change_inscricao %}
-                            <a href="/inscricao/{{i.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            <a href="/inscricao/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_inscricao %}
-                            <a href="/inscricao/{{i.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            <a href="/inscricao/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
                             {% endif %}
                         </td>
                         <td>
-                            <span>{{i.id}}</span>
+                            <span>{{item.id}}</span>
                         </td>
                         <td>
-                            <span>{{i.modalidade}}</span>
+                            <span>{{item.atleta}}</span>
+                        </td><td>
+                            <span>{{item.campus}}</span>
                         </td>
                         <td>
-                            <span>{{i.atleta}}</span>
+                            <span>{{item.etapa}}</span>
                         </td>
                         <td>
-                            <span>{{i.campus}}</span>
+                            <span>{{item.edicao_prova}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

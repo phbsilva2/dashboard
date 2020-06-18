@@ -138,7 +138,7 @@ urlpatterns = [
     path('atleta/<pk>/update', AtletaUpdateView.as_view()),
     path('atleta/<pk>/delete/', AtletaDeleteView.as_view()),
     # Inscrição URLs
-    path('inscricao/', InscricaoView.as_view(), name='inscricao_list'),
+    path('inscricao/', InscricaoView.as_view(), name='inscricao'),
     path('inscricao_create/', InscricaoCreateView.as_view()),
     path('inscricao/<pk>/', InscricaoDetailView.as_view()),
     path('inscricao/<pk>/update', InscricaoUpdateView.as_view()),
