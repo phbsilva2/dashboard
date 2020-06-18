@@ -30,15 +30,16 @@ class Instituto(Base):
 
 
 class Campus(Base):
-    nome = models.CharField(max_length=100, unique=True)
+    nome = models.CharField(max_length=100)
     instituto = models.ForeignKey(Instituto, on_delete=models.CASCADE, verbose_name='Instituto')
 
     class Meta:
+        unique_together = ['nome', 'instituto']
         verbose_name = 'Campus'
         verbose_name_plural = 'Campi'
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome} ({self.instituto.sigla})"
 
     def get_verbose_name(self):
         return self._meta.verbose_name
