@@ -30,7 +30,7 @@ class AtletaDetailView(PermissionRequiredMixin, DetailView):
 
 class AtletaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Atleta
-    fields = ["nome", "foto", "cpf", "rg", "matricula", "genero", "data_nascimento",
+    fields = ["campus", "nome", "foto", "cpf", "rg", "matricula", "genero", "data_nascimento",
               "tipo_sanguineo", "plano_saude", "numero_carteira_sus", "medicamento_controlado",
               "alergia"]
     permission_required = 'jif.add_atleta'
@@ -41,7 +41,7 @@ class AtletaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView)
 
 class AtletaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Atleta
-    fields = ["nome", "foto", "cpf", "rg", "matricula", "genero", "data_nascimento",
+    fields = ["campus", "nome", "foto", "cpf", "rg", "matricula", "genero", "data_nascimento",
               "tipo_sanguineo", "plano_saude", "numero_carteira_sus", "medicamento_controlado",
               "alergia"]
     permission_required = 'jif.change_atleta'
