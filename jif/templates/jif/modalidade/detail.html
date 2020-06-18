@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'modalidade_list' %}">{{modalidade.get_verbose_name}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'modalidade' %}">{{modalidade.get_verbose_name_plural}}</a></li>
         <li class="breadcrumb-item active">Visualizar</li>
     </ol>
 {% endblock %}
@@ -18,11 +18,11 @@
         <div class="card-header">
             Visualizar {{modalidade.get_verbose_name}}
         </div>
-         <div class="card-body">
+        <div class="card-body">
             <table class="table table-bordered">
                 <tbody>
                     <tr class="row1">
-                        <th style="width:190px">
+                        <th style="width:80px">
                             <span>Nome:</span>
                         </th>
                         <td>
@@ -30,42 +30,52 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="width:190px">
-                            <span>Sigla:</span>
-                        </th>
-                        <td>
-                            <span>{{modalidade.sigla}}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th style="width:190px">
-                            <span>Tipo de Modalidade:</span>
-                        </th>
-                        <td>
-                            <span>{{modalidade.tipo_modalidade}}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th style="width:190px">
+                        <th>
                             <span>Tipo:</span>
                         </th>
                         <td>
                             <span>{{modalidade.get_tipo_display}}</span>
                         </td>
                     </tr>
-                    <tr>
-                        <th style="width:190px">
-                            <span>Lotação Permitida:</span>
-                        </th>
-                        <td>
-                            <span>{{modalidade.lotacao_permitida}}</span>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
-             <div class="box-tools pull-left">
-                <a href="{% url 'modalidade_list' %}" class="btn btn-primary btn-sm"> Voltar </a>
+            <div class="text-center">
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span>Data do Cadastro</span>
+                            </th>
+                            <th>
+                                <span>Data da Última Alteração</span>
+                            </th>
+                            <th>
+                                <span>Ativo</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span>{{modalidade.data_hora_cadastro}}</span>
+                            </td>
+                            <td>
+                                <span>{{modalidade.data_hora_ultima_alteracao}}</span>
+                            </td>
+                            <td>
+                                {% if modalidade.ativo %}
+                                <i class="fa fa-check text-success" title="Sim"></i>
+                                {% else %}
+                                <i class="fa fa fa-remove text-danger" title="Não"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-         </div>
+            <div class="box-tools pull-left">
+                <a href="{% url 'modalidade' %}" class="btn btn-primary btn-sm"> Voltar </a>
+            </div>
+        </div>
     </div>
 {% endblock %}

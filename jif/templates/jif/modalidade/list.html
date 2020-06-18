@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item active">{{modalidade.get_verbose_name}}</li>
+        <li class="breadcrumb-item active">{{modalidade.get_verbose_name_plural}}</li>
     </ol>
 {% endblock %}
 
@@ -31,36 +31,36 @@
                     <tr>
                         <th></th>
                         <th>Nome</th>
-                        <th>Tipo de Modalidade</th>
                         <th>Tipo</th>
-                        <th>Lotação Permitida</th>
+                        <th>Ativo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for m in modalidades %}
+                    {% for item in modalidades %}
                     <tr class="row1">
                         <td style="width:70px">
                             {% if perms.jif.view_modalidade %}
-                            <a href="/modalidade/{{m.id}}" title="Visualizar"><i class="fa fa-eye mr-1"></i></a>
+                            <a href="/modalidade/{{item.id}}" title="Visualizar"><i class="fa fa-eye text-info mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.change_modalidade %}
-                            <a href="/modalidade/{{m.id}}/update" title="Editar"><i class="fa fa-edit mr-1"></i></a>
+                            <a href="/modalidade/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_modalidade %}
-                            <a href="/modalidade/{{m.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash"></i></a>
+                            <a href="/modalidade/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
                             {% endif %}
                         </td>
                         <td>
-                            <span>{{m.nome}}</span>
+                            <span>{{item.nome}}</span>
                         </td>
                         <td>
-                            <span>{{m.tipo_modalidade}}</span>
+                            <span>{{item.get_tipo_display}}</span>
                         </td>
                         <td>
-                            <span>{{m.get_tipo_display}}</span>
-                        </td>
-                        <td>
-                            <span>{{m.lotacao_permitida}}</span>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

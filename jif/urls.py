@@ -126,7 +126,7 @@ urlpatterns = [
     path('etapa/<pk>/update', EtapaUpdateView.as_view()),
     path('etapa/<pk>/delete/', EtapaDeleteView.as_view()),
     # Modalidade URLs
-    path('modalidade/', ModalidadeView.as_view(), name='modalidade_list'),
+    path('modalidade/', ModalidadeView.as_view(), name='modalidade'),
     path('modalidade_create/', ModalidadeCreateView.as_view()),
     path('modalidade/<pk>/', ModalidadeDetailView.as_view()),
     path('modalidade/<pk>/update', ModalidadeUpdateView.as_view()),
