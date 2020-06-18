@@ -221,6 +221,7 @@ class EdicaoModalidadeProva(models.Model):
 
 
 class Atleta(Base):
+    campus = models.ForeignKey(Campus, on_delete=models.CASCADE, verbose_name='Campus')
     nome = models.CharField(max_length=100)
     foto = StdImageField(upload_to='atletas', variations={'thumb': (124, 124)},
                          blank=True)  # TODO Aperfeiçoar parâmetros: https://pypi.org/project/django-stdimage/
@@ -228,7 +229,7 @@ class Atleta(Base):
     rg = models.CharField('RG', max_length=50, unique=True)
     matricula = models.CharField('Matrícula', max_length=20, unique=True)
     genero = models.CharField('Gênero', max_length=1, choices=[['M', 'Masculino'], ['F', 'Femenino']])
-    data_nascimento = models.DateField('Data de Nascimento', blank=True, null=True)
+    data_nascimento = models.DateField('Data de Nascimento', blank=False, null=False)
     tipo_sanguineo = models.CharField('Tipo Sanguíneo', max_length=3, blank=True)
     plano_saude = models.CharField('Plano de Saúde', max_length=200, blank=True)
     numero_carteira_sus = models.CharField('Nº Carteira do SUS', max_length=20, blank=True)
