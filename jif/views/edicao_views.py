@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.views.generic import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -73,16 +73,27 @@ class EdicaoCategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, Cr
     permission_required = 'jif.add_edicao'
     template_name = 'jif/edicao/categoria/form.html'
     success_message = "'%(categoria)s' foi adicionado com sucesso!"
-    success_url = "/edicao_create"
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.kwargs['pk']
+        context = super(EdicaoCategoriaCreateView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
 
     def form_valid(self, form):
         edicao_id = self.kwargs['pk']
         obj = form.save(commit=False)
         obj.edicao = Edicao.objects.get(pk=edicao_id)
-        obj.save()
-
-        messages.success(self.request, 'Categoria foi adicionado com sucesso!')
-        return HttpResponseRedirect(reverse('edicao'))
+        try:
+            obj.save()
+            return HttpResponseRedirect(f'/edicao/{edicao_id}/update')
+            # return super(EdicaoCategoriaCreateView, self).form_valid(form)
+        except IntegrityError:
+            messages.error(self.request, 'Essa Categoria já foi cadastrada na Edição.')
+            return self.render_to_response(self.get_context_data(form=form))
+        except Exception as e:
+            messages.error(self.request, e)
+            return self.render_to_response(self.get_context_data(form=form))
 
 
 class EdicaoCategoriaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -90,9 +101,15 @@ class EdicaoCategoriaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, Up
     fields = ["categoria", "regras", "ativo"]
     permission_required = 'jif.change_edicao'
     template_name = 'jif/edicao/categoria/form.html'
-    context_object_name = 'edicao'
+    context_object_name = 'edicaocategoria'
     success_message = "'%(categoria)s' foi alterado com sucesso!"
     success_url = "/edicao"
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        context = super(EdicaoCategoriaUpdateView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
 
 
 class EdicaoCategoriaDeleteView(PermissionRequiredMixin, DeleteView):
@@ -101,6 +118,12 @@ class EdicaoCategoriaDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'jif/edicao/categoria/confirm_delete.html'
     context_object_name = 'edicao_categoria'
     success_url = "/edicao"
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        context = super(EdicaoCategoriaDeleteView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, f"'{self.get_object()}' foi excluído com sucesso!")
