@@ -93,3 +93,15 @@ class EdicaoCategoriaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, Up
     context_object_name = 'edicao'
     success_message = "'%(categoria)s' foi alterado com sucesso!"
     success_url = "/edicao"
+
+
+class EdicaoCategoriaDeleteView(PermissionRequiredMixin, DeleteView):
+    model = EdicaoCategoria
+    permission_required = 'jif.delete_edicao'
+    template_name = 'jif/edicao/categoria/confirm_delete.html'
+    context_object_name = 'edicao_categoria'
+    success_url = "/edicao"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, f"'{self.get_object()}' foi excluído com sucesso!")
+        return super(EdicaoCategoriaDeleteView, self).delete(request, *args, **kwargs)
