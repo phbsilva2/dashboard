@@ -23,7 +23,8 @@ from jif.views.edicao_views import (
     EdicaoCreateView,
     EdicaoDetailView,
     EdicaoUpdateView,
-    EdicaoDeleteView
+    EdicaoDeleteView,
+    EdicaoCategoriaCreateView,
 )
 
 from jif.views.categoria_views import (
@@ -107,6 +108,7 @@ urlpatterns = [
     path('edicao/<pk>/', EdicaoDetailView.as_view()),
     path('edicao/<pk>/update', EdicaoUpdateView.as_view()),
     path('edicao/<pk>/delete/', EdicaoDeleteView.as_view()),
+    path('edicao/categoria/create/<pk>/', EdicaoCategoriaCreateView.as_view()),
     # Categoria URLs
     path('categoria/', CategoriaView.as_view(), name='categoria'),
     path('categoria_create/', CategoriaCreateView.as_view()),

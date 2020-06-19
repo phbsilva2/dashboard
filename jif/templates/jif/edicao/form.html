@@ -39,5 +39,51 @@
                 </div>
             </form>
         </div>
+        {% if edicao %}
+        <div class="card-body">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:70px"></th>
+                        <th>Categorias</th>
+                        <th>Regras</th>
+                        <th>Ativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in categorias_edicao %}
+                    <tr>
+                        <td>
+                            {% if perms.jif.change_edicao %}
+                            <a href="/edicao/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.delete_edicao %}
+                            <a href="/edicao/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{item.categoria}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.regras}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if perms.jif.view_edicao %}
+            <div class="box-tools pull-left mt-2">
+                <a href="/edicao/categoria/create/{{edicao.id}}/" class="btn btn-primary btn-sm">Incluir Categoria</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

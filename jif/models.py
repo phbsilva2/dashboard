@@ -127,17 +127,18 @@ class Categoria(Base):
         return self._meta.verbose_name_plural
 
 
-class EdicaoCategoria(models.Model):
+class EdicaoCategoria(Base):
     edicao = models.ForeignKey(Edicao, on_delete=models.CASCADE, verbose_name='Edição')
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name='Categoria')
     regras = models.TextField('Regras', blank=True)
 
     class Meta:
+        unique_together = ['edicao', 'categoria']
         verbose_name = 'Categoria da Edição'
         verbose_name_plural = 'Categorias da Edição'
 
     def __str__(self):
-        return f"{self.pk}"
+        return f"{self.edicao} {self.categoria}"
 
     def get_verbose_name(self):
         return self._meta.verbose_name
