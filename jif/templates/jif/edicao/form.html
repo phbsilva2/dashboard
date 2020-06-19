@@ -55,7 +55,7 @@
                     <tr>
                         <td>
                             {% if perms.jif.change_edicao %}
-                            <a href="/edicao/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
+                            <a href="/edicao/categoria/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
                             {% endif %}
                             {% if perms.jif.delete_edicao %}
                             <a href="/edicao/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>

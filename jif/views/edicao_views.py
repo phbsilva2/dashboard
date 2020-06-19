@@ -41,7 +41,7 @@ class EdicaoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView)
 
 class EdicaoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Edicao
-    fields = ["nome", "data_inicio_edicao", "data_termino_edicao"]
+    fields = ["nome", "data_inicio_edicao", "data_termino_edicao", "ativo"]
     permission_required = 'jif.change_edicao'
     template_name = 'jif/edicao/form.html'
     context_object_name = 'edicao'
@@ -49,9 +49,9 @@ class EdicaoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView)
     success_url = "/edicao"
 
     def get_context_data(self, **kwargs):
-        teste = self.get_object()
+        edicao = self.get_object()
         context = super(EdicaoUpdateView, self).get_context_data(**kwargs)
-        context['categorias_edicao'] = EdicaoCategoria.objects.filter(edicao_id=teste.id).order_by('id')
+        context['categorias_edicao'] = EdicaoCategoria.objects.filter(edicao_id=edicao.id).order_by('id')
         return context
 
 
@@ -83,3 +83,13 @@ class EdicaoCategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, Cr
 
         messages.success(self.request, 'Categoria foi adicionado com sucesso!')
         return HttpResponseRedirect(reverse('edicao'))
+
+
+class EdicaoCategoriaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = EdicaoCategoria
+    fields = ["categoria", "regras", "ativo"]
+    permission_required = 'jif.change_edicao'
+    template_name = 'jif/edicao/categoria/form.html'
+    context_object_name = 'edicao'
+    success_message = "'%(categoria)s' foi alterado com sucesso!"
+    success_url = "/edicao"
