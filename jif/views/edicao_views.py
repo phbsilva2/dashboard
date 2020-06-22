@@ -183,3 +183,24 @@ class EdicaoModalidadeUpdateView(PermissionRequiredMixin, SuccessMessageMixin, U
         context = super(EdicaoModalidadeUpdateView, self).get_context_data(**kwargs)
         context['edicao_id'] = edicao_id
         return context
+
+
+class EdicaoModalidadeDeleteView(PermissionRequiredMixin, DeleteView):
+    model = EdicaoModalidade
+    permission_required = 'jif.delete_edicao'
+    template_name = 'jif/edicao/modalidade/confirm_delete.html'
+    context_object_name = 'edicao_modalidade'
+
+    def get_success_url(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        return f'/edicao/{edicao_id}/update'
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        context = super(EdicaoModalidadeDeleteView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, f"A modalidade '{self.get_object()}' foi excluída com sucesso!")
+        return super(EdicaoModalidadeDeleteView, self).delete(request, *args, **kwargs)
