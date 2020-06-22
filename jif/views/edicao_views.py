@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render
 
-from jif.models import Edicao, EdicaoCategoria, EdicaoModalidade
+from jif.models import Edicao, EdicaoCategoria, EdicaoModalidade, EdicaoModalidadeProva
 
 
 class EdicaoView(View):
@@ -51,8 +51,12 @@ class EdicaoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView)
     def get_context_data(self, **kwargs):
         edicao = self.get_object()
         context = super(EdicaoUpdateView, self).get_context_data(**kwargs)
-        context['categorias_edicao'] = EdicaoCategoria.objects.filter(edicao_id=edicao.id).order_by('categoria__nome')
-        context['modalidades_edicao'] = EdicaoModalidade.objects.filter(edicao_id=edicao.id).order_by('modalidade__nome')
+        context['categorias_edicao'] = EdicaoCategoria.objects.filter(edicao_id=edicao.id)\
+            .order_by('categoria__nome')
+        context['modalidades_edicao'] = EdicaoModalidade.objects.filter(edicao_id=edicao.id)\
+            .order_by('modalidade__nome')
+        context['provas_edicao'] = EdicaoModalidadeProva.objects.filter(edicao_modalidade__edicao_id=edicao.id)\
+            .order_by('edicao_modalidade__modalidade__nome', 'prova__nome')
         return context
 
 
