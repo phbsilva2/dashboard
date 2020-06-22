@@ -165,13 +165,14 @@ class Modalidade(Base):
         return self._meta.verbose_name_plural
 
 
-class EdicaoModalidade(models.Model):
-    edicao_categoria = models.ForeignKey(EdicaoCategoria, on_delete=models.CASCADE, verbose_name='Categoria')
+class EdicaoModalidade(Base):
+    edicao = models.ForeignKey(Edicao, on_delete=models.CASCADE, verbose_name='Edição')
     modalidade = models.ForeignKey(Modalidade, on_delete=models.CASCADE, verbose_name='Modalidade')
     genero = models.CharField('Gênero', max_length=1, choices=[['M', 'Masculino'], ['F', 'Femenino']])
     limite_participantes_modalidade = models.IntegerField('Limite de Participantes na Modalidade', blank=False, null=False)
 
     class Meta:
+        unique_together = ['edicao', 'modalidade', 'genero']
         verbose_name = 'Modalidade da Edição'
         verbose_name_plural = 'Modalidades da Edição'
 
