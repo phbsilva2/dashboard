@@ -72,7 +72,7 @@ class EdicaoCategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, Cr
     fields = ["categoria", "regras"]
     permission_required = 'jif.add_edicao'
     template_name = 'jif/edicao/categoria/form.html'
-    success_message = "'%(categoria)s' foi adicionado com sucesso!"
+    success_message = "A categoria '%(categoria)s' foi adicionada com sucesso!"
 
     def get_context_data(self, **kwargs):
         edicao_id = self.kwargs['pk']
@@ -102,8 +102,11 @@ class EdicaoCategoriaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, Up
     permission_required = 'jif.change_edicao'
     template_name = 'jif/edicao/categoria/form.html'
     context_object_name = 'edicaocategoria'
-    success_message = "'%(categoria)s' foi alterado com sucesso!"
-    success_url = "/edicao"
+    success_message = "A categoria '%(categoria)s' foi alterada com sucesso!"
+
+    def get_success_url(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        return f'/edicao/{edicao_id}/update'
 
     def get_context_data(self, **kwargs):
         edicao_id = self.object.edicao.id
@@ -117,7 +120,10 @@ class EdicaoCategoriaDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'jif.delete_edicao'
     template_name = 'jif/edicao/categoria/confirm_delete.html'
     context_object_name = 'edicao_categoria'
-    success_url = "/edicao"
+
+    def get_success_url(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        return f'/edicao/{edicao_id}/update'
 
     def get_context_data(self, **kwargs):
         edicao_id = self.object.edicao.id
@@ -126,5 +132,5 @@ class EdicaoCategoriaDeleteView(PermissionRequiredMixin, DeleteView):
         return context
 
     def delete(self, request, *args, **kwargs):
-        messages.success(request, f"'{self.get_object()}' foi excluído com sucesso!")
+        messages.success(request, f"A categoria '{self.get_object()}' foi excluída com sucesso!")
         return super(EdicaoCategoriaDeleteView, self).delete(request, *args, **kwargs)
