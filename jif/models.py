@@ -177,7 +177,7 @@ class EdicaoModalidade(Base):
         verbose_name_plural = 'Modalidades da Edição'
 
     def __str__(self):
-        return f"{self.pk}"
+        return f"{self.edicao} {self.modalidade}  {self.genero}"
 
     def get_verbose_name(self):
         return self._meta.verbose_name

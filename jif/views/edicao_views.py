@@ -139,7 +139,7 @@ class EdicaoCategoriaDeleteView(PermissionRequiredMixin, DeleteView):
 
 class EdicaoModalidadeCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = EdicaoModalidade
-    fields = ["modalidade", "genero", "limite_participantes_modalidade"]
+    fields = ["modalidade", "genero", "limite_participantes_modalidade", "ativo"]
     permission_required = 'jif.add_edicao'
     template_name = 'jif/edicao/modalidade/form.html'
     success_message = "A modalidade '%(modalidade)s' foi adicionada com sucesso!"
@@ -164,3 +164,22 @@ class EdicaoModalidadeCreateView(PermissionRequiredMixin, SuccessMessageMixin, C
         except Exception as e:
             messages.error(self.request, e)
             return self.render_to_response(self.get_context_data(form=form))
+
+
+class EdicaoModalidadeUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = EdicaoModalidade
+    fields = ["modalidade", "genero", "limite_participantes_modalidade", "ativo"]
+    permission_required = 'jif.change_edicao'
+    template_name = 'jif/edicao/modalidade/form.html'
+    context_object_name = 'edicaomodalidade'
+    success_message = "A modalidade '%(modalidade)s' foi alterada com sucesso!"
+
+    def get_success_url(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        return f'/edicao/{edicao_id}/update'
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        context = super(EdicaoModalidadeUpdateView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
