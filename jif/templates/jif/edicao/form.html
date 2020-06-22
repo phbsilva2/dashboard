@@ -58,7 +58,7 @@
                 <thead>
                     <tr>
                         <th style="width:70px"></th>
-                        <th>Categorias</th>
+                        <th>Categoria</th>
                         <th>Regras</th>
                         <th>Ativo</th>
                     </tr>
@@ -111,7 +111,7 @@
                     <tr>
                         <th style="width:70px"></th>
                         <th>Modalidade</th>
-                        <th>Sexo</th>
+                        <th>Gênero</th>
                         <th>Ativo</th>
                     </tr>
                 </thead>
@@ -130,7 +130,7 @@
                             <span>{{item.modalidade}}</span>
                         </td>
                         <td>
-                            <span>{{item.sexo}}</span>
+                            <span>{{item.get_genero_display}}</span>
                         </td>
                         <td>
                             {% if item.ativo %}

@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render
 
-from jif.models import Edicao, EdicaoCategoria
+from jif.models import Edicao, EdicaoCategoria, EdicaoModalidade
 
 
 class EdicaoView(View):
@@ -51,7 +51,8 @@ class EdicaoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView)
     def get_context_data(self, **kwargs):
         edicao = self.get_object()
         context = super(EdicaoUpdateView, self).get_context_data(**kwargs)
-        context['categorias_edicao'] = EdicaoCategoria.objects.filter(edicao_id=edicao.id).order_by('id')
+        context['categorias_edicao'] = EdicaoCategoria.objects.filter(edicao_id=edicao.id).order_by('categoria__nome')
+        context['modalidades_edicao'] = EdicaoModalidade.objects.filter(edicao_id=edicao.id).order_by('modalidade__nome')
         return context
 
 
@@ -134,3 +135,32 @@ class EdicaoCategoriaDeleteView(PermissionRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(request, f"A categoria '{self.get_object()}' foi excluída com sucesso!")
         return super(EdicaoCategoriaDeleteView, self).delete(request, *args, **kwargs)
+
+
+class EdicaoModalidadeCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+    model = EdicaoModalidade
+    fields = ["modalidade", "genero", "limite_participantes_modalidade"]
+    permission_required = 'jif.add_edicao'
+    template_name = 'jif/edicao/modalidade/form.html'
+    success_message = "A modalidade '%(modalidade)s' foi adicionada com sucesso!"
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.kwargs['pk']
+        context = super(EdicaoModalidadeCreateView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
+
+    def form_valid(self, form):
+        edicao_id = self.kwargs['pk']
+        obj = form.save(commit=False)
+        obj.edicao = Edicao.objects.get(pk=edicao_id)
+        try:
+            obj.save()
+            return HttpResponseRedirect(f'/edicao/{edicao_id}/update')
+            # return super(EdicaoModalidadeCreateView, self).form_valid(form)
+        except IntegrityError:
+            messages.error(self.request, 'Essa Modalidade já foi cadastrada na Edição.')
+            return self.render_to_response(self.get_context_data(form=form))
+        except Exception as e:
+            messages.error(self.request, e)
+            return self.render_to_response(self.get_context_data(form=form))
