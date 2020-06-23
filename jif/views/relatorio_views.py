@@ -47,10 +47,13 @@ def atleta_modalidade(request):
         if form.is_valid():
             if form.cleaned_data['modalidade']:
                 modalidade_id = form.cleaned_data['modalidade'].pk
-                inscricoes = Inscricao.objects.filter(modalidade__pk=modalidade_id).order_by('atleta__nome')
+                inscricoes = Inscricao.objects\
+                    .filter(edicao_prova__edicao_modalidade__modalidade__pk=modalidade_id)\
+                    .order_by('atleta__nome')
                 mostrar_modalidade = False
             else:
-                inscricoes = Inscricao.objects.all().order_by('modalidade__nome', 'atleta__nome')
+                inscricoes = Inscricao.objects.all()\
+                    .order_by('edicao_prova__edicao_modalidade__modalidade__nome', 'atleta__nome')
                 mostrar_modalidade = True
 
             return render(request, 'jif/relatorio/atletamodalidade.html',

@@ -36,7 +36,7 @@
                         {% endif %}
                         <th><div class="text">Nome do Atleta</div></th>
                         <th><div class="text">Matrícula</div></th>
-                        <th><div class="text">Modalidade</div></th>
+                        <th><div class="text">Campus</div></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@
                     <tr class="row1">
                         {% if mostrar_modalidade %}
                         <td>
-                            <span>{{inscricao.modalidade.nome}}</span>
+                            <span>{{inscricao.edicao_prova.edicao_modalidade}}</span>
                         </td>
                         {% endif %}
                         <td>
