@@ -184,7 +184,8 @@ class EdicaoModalidadeUpdateView(PermissionRequiredMixin, SuccessMessageMixin, U
         edicao_modalidade_id = self.object.id
         context = super(EdicaoModalidadeUpdateView, self).get_context_data(**kwargs)
         context['edicao_modalidade_id'] = edicao_modalidade_id
-        context['provas_edicao'] = EdicaoModalidadeProva.objects.filter(edicao_modalidade__id=edicao_modalidade_id) \
+        context['provas_edicao'] = EdicaoModalidadeProva\
+            .objects.filter(edicao_modalidade__id=edicao_modalidade_id) \
             .order_by('edicao_modalidade__modalidade__nome', 'prova__nome')
         return context
 
@@ -245,3 +246,26 @@ class EdicaoModalidadeProvaCreateView(PermissionRequiredMixin, SuccessMessageMix
         except Exception as e:
             messages.error(self.request, e)
             return self.render_to_response(self.get_context_data(form=form))
+
+
+class EdicaoModalidadeProvaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = EdicaoModalidadeProva
+    fields = ["prova", "limite_equipe_campus", "limite_participante_equipe",
+              "limite_participante_individual", "ativo"]
+    permission_required = 'jif.change_edicao'
+    template_name = 'jif/edicao/prova/form.html'
+    context_object_name = 'edicaomodalidadeprova'
+    success_message = "A prova '%(prova)s' foi alterada com sucesso!"
+
+    def get_success_url(self, **kwargs):
+        edicao_modalidade_id = self.object.edicao_modalidade.id
+        return f'/edicao/modalidade/{edicao_modalidade_id}/update'
+
+    def get_context_data(self, **kwargs):
+        edicao_modalidade_id = self.object.edicao_modalidade.id
+        context = super(EdicaoModalidadeProvaUpdateView, self).get_context_data(**kwargs)
+        context['edicao_modalidade_id'] = edicao_modalidade_id
+        context['provas_edicao'] = EdicaoModalidadeProva.objects\
+            .filter(edicao_modalidade__id=edicao_modalidade_id) \
+            .order_by('edicao_modalidade__modalidade__nome', 'prova__nome')
+        return context
