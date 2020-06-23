@@ -8,18 +8,18 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Relatórios</li>
-        <li class="breadcrumb-item active">Atletas por Tipo de Modalidade</li>
+        <li class="breadcrumb-item active">Atletas por Prova</li>
     </ol>
 {% endblock %}
 
 {% block content %}
     <div class="card mb-3">
         <div class="card-header">
-            Atletas por Tipo de Modalidade
+            Atletas por Prova
         </div>
 
         <div class="card-body">
-            <form action="{% url 'atleta_tipo_modalidade' %}" method="post">
+            <form action="{% url 'atleta_prova' %}" method="post">
                 {% csrf_token %}
                 {{ form }}
                 <input type="submit" class="default" value="Enviar">
@@ -31,8 +31,8 @@
             <table id="result_list" class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        {% if mostrar_tipo_modalidade %}
-                        <th><div class="text">Tipo Modalidade</div></th>
+                        {% if mostrar_prova %}
+                        <th><div class="text">Prova</div></th>
                         {% endif %}
                         <th><div class="text">Nome do Atleta</div></th>
                         <th><div class="text">Matrícula</div></th>
@@ -43,9 +43,9 @@
                 <tbody>
                     {% for inscricao in inscricoes %}
                     <tr class="row1">
-                        {% if mostrar_tipo_modalidade %}
+                        {% if mostrar_prova %}
                         <td>
-                            <span>{{inscricao.modalidade.tipo_modalidade.titulo}}</span>
+                            <span>{{inscricao.edicao_prova.prova}}</span>
                         </td>
                         {% endif %}
                         <td>
@@ -58,7 +58,7 @@
                             <span>{{inscricao.campus.nome}}</span>
                          </td>
                         <td>
-                            <span>{{inscricao.modalidade.nome}}</span>
+                            <span>{{inscricao.edicao_prova.edicao_modalidade}}</span>
                         </td>
                     </tr>
                     {% endfor %}

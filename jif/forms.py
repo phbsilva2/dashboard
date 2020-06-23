@@ -2,20 +2,22 @@ from django import forms
 
 from .models import (
     Instituto,
-    Modalidade
+    Campus,
+    Modalidade,
+    Prova
 )
 
 
 class RelatorioAtletasCampusForm(forms.Form):
-    instituto = forms.ModelChoiceField(Instituto.objects.all().order_by('nome'), required=False)
+    campus = forms.ModelChoiceField(Campus.objects.all().order_by('nome'), required=False)
 
 
 class RelatorioAtletasModalidadeForm(forms.Form):
     modalidade = forms.ModelChoiceField(Modalidade.objects.all().order_by('nome'), required=False)
 
 
-class RelatorioAtletasTipoModalidadeForm(forms.Form):
-    tipo_modalidade = forms.ModelChoiceField(Instituto.objects.all().order_by('titulo'), required=False)
+class RelatorioAtletasProvaForm(forms.Form):
+    prova = forms.ModelChoiceField(Prova.objects.all().order_by('nome'), required=False)
 
 
 class RelatorioInscricoesForm(forms.Form):

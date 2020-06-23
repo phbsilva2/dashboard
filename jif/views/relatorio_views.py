@@ -8,7 +8,7 @@ from jif.models import (
 from jif.forms import (
     RelatorioAtletasCampusForm,
     RelatorioAtletasModalidadeForm,
-    RelatorioAtletasTipoModalidadeForm,
+    RelatorioAtletasProvaForm,
     RelatorioInscricoesForm,
 )
 
@@ -21,9 +21,9 @@ def atleta_campus(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            if form.cleaned_data['instituto']:
-                instituto_id = form.cleaned_data['instituto'].pk
-                inscricoes = Inscricao.objects.filter(campus__instituto__pk=instituto_id).order_by('atleta__nome')
+            if form.cleaned_data['campus']:
+                campus_id = form.cleaned_data['campus'].pk
+                inscricoes = Inscricao.objects.filter(campus__instituto__pk=campus_id).order_by('atleta__nome')
                 mostrar_campus = False
             else:
                 inscricoes = Inscricao.objects.all().order_by('campus__instituto__nome', 'atleta__nome')
@@ -67,27 +67,27 @@ def atleta_modalidade(request):
 
 
 @login_required
-def atleta_tipo_modalidade(request):
-    form = RelatorioAtletasTipoModalidadeForm(request.POST or None)
+def atleta_prova(request):
+    form = RelatorioAtletasProvaForm(request.POST or None)
 
     if request.method == 'POST':
         if form.is_valid():
-            if form.cleaned_data['tipo_modalidade']:
-                tipo_modalidade_id = form.cleaned_data['tipo_modalidade'].pk
-                inscricoes = Inscricao.objects.filter(modalidade__tipo_modalidade__pk=tipo_modalidade_id).order_by('atleta__nome')
-                mostrar_tipo_modalidade = False
+            if form.cleaned_data['prova']:
+                prova_id = form.cleaned_data['prova'].pk
+                inscricoes = Inscricao.objects.filter(edicao_prova__prova__pk=prova_id).order_by('atleta__nome')
+                mostrar_prova = False
             else:
-                inscricoes = Inscricao.objects.all().order_by('modalidade__tipo_modalidade__titulo', 'atleta__nome')
-                mostrar_tipo_modalidade = True
+                inscricoes = Inscricao.objects.all().order_by('edicao_prova__prova', 'atleta__nome')
+                mostrar_prova = True
 
-            return render(request, 'jif/relatorio/atletatipomodalidade.html',
-                          {'form': form, 'inscricoes': inscricoes, 'mostrar_tipo_modalidade': mostrar_tipo_modalidade})
+            return render(request, 'jif/relatorio/atletaprova.html',
+                          {'form': form, 'inscricoes': inscricoes, 'mostrar_prova': mostrar_prova})
     else:
-        form = RelatorioAtletasTipoModalidadeForm()
+        form = RelatorioAtletasProvaForm()
     context = {
         'form': form
     }
-    return render(request, 'jif/relatorio/atletatipomodalidade.html', context)
+    return render(request, 'jif/relatorio/atletaprova.html', context)
 
 
 @login_required
