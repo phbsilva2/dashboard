@@ -177,7 +177,7 @@ class EdicaoModalidade(Base):
         verbose_name_plural = 'Modalidades da Edição'
 
     def __str__(self):
-        return f"{self.edicao} {self.modalidade}  {self.genero}"
+        return f"{self.edicao} {self.modalidade} {self.genero}"
 
     def get_verbose_name(self):
         return self._meta.verbose_name
@@ -204,7 +204,7 @@ class Prova(Base):
         return self._meta.verbose_name_plural
 
 
-class EdicaoModalidadeProva(models.Model):
+class EdicaoModalidadeProva(Base):
     edicao_modalidade = models.ForeignKey(EdicaoModalidade, on_delete=models.CASCADE, verbose_name='Modalidade')
     prova = models.ForeignKey(Prova, on_delete=models.CASCADE, verbose_name='Prova')
     limite_equipe_campus = models.IntegerField('Limite de Equipe por Campus', blank=False, null=False)
@@ -212,11 +212,12 @@ class EdicaoModalidadeProva(models.Model):
     limite_participante_individual = models.IntegerField('Limite de Participante Individual', blank=False, null=False)
 
     class Meta:
+        unique_together = ['edicao_modalidade', 'prova']
         verbose_name = 'Prova da Modalidade'
         verbose_name_plural = 'Provas da Modalidade'
 
     def __str__(self):
-        return f"{self.pk}"
+        return f"{self.edicao_modalidade} {self.prova}"
 
     def get_verbose_name(self):
         return self._meta.verbose_name

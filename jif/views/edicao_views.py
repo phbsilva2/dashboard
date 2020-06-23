@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render
 
-from jif.models import Edicao, EdicaoCategoria, EdicaoModalidade, EdicaoModalidadeProva
+from jif.models import Edicao, EdicaoCategoria, EdicaoModalidade, EdicaoModalidadeProva, Prova
 
 
 class EdicaoView(View):
@@ -55,8 +55,6 @@ class EdicaoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView)
             .order_by('categoria__nome')
         context['modalidades_edicao'] = EdicaoModalidade.objects.filter(edicao_id=edicao.id)\
             .order_by('modalidade__nome')
-        context['provas_edicao'] = EdicaoModalidadeProva.objects.filter(edicao_modalidade__edicao_id=edicao.id)\
-            .order_by('edicao_modalidade__modalidade__nome', 'prova__nome')
         return context
 
 
@@ -183,9 +181,11 @@ class EdicaoModalidadeUpdateView(PermissionRequiredMixin, SuccessMessageMixin, U
         return f'/edicao/{edicao_id}/update'
 
     def get_context_data(self, **kwargs):
-        edicao_id = self.object.edicao.id
+        edicao_modalidade_id = self.object.id
         context = super(EdicaoModalidadeUpdateView, self).get_context_data(**kwargs)
-        context['edicao_id'] = edicao_id
+        context['edicao_modalidade_id'] = edicao_modalidade_id
+        context['provas_edicao'] = EdicaoModalidadeProva.objects.filter(edicao_modalidade__id=edicao_modalidade_id) \
+            .order_by('edicao_modalidade__modalidade__nome', 'prova__nome')
         return context
 
 
@@ -208,3 +208,40 @@ class EdicaoModalidadeDeleteView(PermissionRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(request, f"A modalidade '{self.get_object()}' foi excluída com sucesso!")
         return super(EdicaoModalidadeDeleteView, self).delete(request, *args, **kwargs)
+
+
+class EdicaoModalidadeProvaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+    model = EdicaoModalidadeProva
+    fields = ["prova", "limite_equipe_campus", "limite_participante_equipe",
+              "limite_participante_individual", "ativo"]
+    permission_required = 'jif.add_edicao'
+    template_name = 'jif/edicao/prova/form.html'
+    success_message = "A prova '%(prova)s' foi adicionada com sucesso!"
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.kwargs['pk']
+        context = super(EdicaoModalidadeProvaCreateView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
+
+    def get_form(self, *args, **kwargs):
+        edicao_modalidade_id = self.kwargs['pk']
+        edicao_modalidade = EdicaoModalidade.objects.get(pk=edicao_modalidade_id)
+        form = super(EdicaoModalidadeProvaCreateView, self).get_form(*args, **kwargs)
+        form.fields['prova'].queryset = Prova.objects.filter(modalidade_id=edicao_modalidade.modalidade)
+        return form
+
+    def form_valid(self, form):
+        edicao_modalidade_id = self.kwargs['pk']
+        obj = form.save(commit=False)
+        obj.edicao_modalidade = EdicaoModalidade.objects.get(pk=edicao_modalidade_id)
+        try:
+            obj.save()
+            return HttpResponseRedirect(f'/edicao/modalidade/{edicao_modalidade_id}/update')
+            # return super(EdicaoModalidadeCreateView, self).form_valid(form)
+        except IntegrityError:
+            messages.error(self.request, 'Essa Prova já foi cadastrada na Edição.')
+            return self.render_to_response(self.get_context_data(form=form))
+        except Exception as e:
+            messages.error(self.request, e)
+            return self.render_to_response(self.get_context_data(form=form))
