@@ -70,17 +70,19 @@ class InscricaoModalidadeMixin(object):
 
     def get_providers(self):
         datasets = []
-        inscricoes = Inscricao.objects.all().values('modalidade__nome').annotate(
-            total=Count('modalidade__nome')).order_by('modalidade__nome')
+        inscricoes = Inscricao.objects.all().values('edicao_prova__edicao_modalidade__modalidade__nome')\
+            .annotate(total=Count('edicao_prova__edicao_modalidade__modalidade__nome'))\
+            .order_by('edicao_prova__edicao_modalidade__modalidade__nome')
 
         for inscricao in inscricoes:
-            datasets.append(inscricao['modalidade__nome'])
+            datasets.append(inscricao['edicao_prova__edicao_modalidade__modalidade__nome'])
         return datasets
 
     def get_data(self):
         dados = []
-        inscricoes = Inscricao.objects.all().values('modalidade__nome').annotate(
-            total=Count('modalidade__nome')).order_by('modalidade__nome')
+        inscricoes = Inscricao.objects.all().values('edicao_prova__edicao_modalidade__modalidade__nome')\
+            .annotate(total=Count('edicao_prova__edicao_modalidade__modalidade__nome'))\
+            .order_by('edicao_prova__edicao_modalidade__modalidade__nome')
 
         for inscricao in inscricoes:
             dados.append([inscricao['total']])
@@ -117,11 +119,13 @@ class InscricaoModalidadeLineMixin(object):
 
     def get_labels(self):
         labels = []
-        inscricoes = Inscricao.objects.all().values('modalidade__nome').annotate(
-            total=Count('modalidade__nome')).order_by('total', 'modalidade__nome')
+        inscricoes = Inscricao.objects.all()\
+            .values('edicao_prova__edicao_modalidade__modalidade__nome')\
+            .annotate(total=Count('edicao_prova__edicao_modalidade__modalidade__nome'))\
+            .order_by('total', 'edicao_prova__edicao_modalidade__modalidade__nome')
 
         for inscricao in inscricoes:
-            labels.append(inscricao['modalidade__nome'])
+            labels.append(inscricao['edicao_prova__edicao_modalidade__modalidade__nome'])
         return labels
 
     def get_providers(self):
@@ -131,8 +135,10 @@ class InscricaoModalidadeLineMixin(object):
 
     def get_data(self):
         dados = []
-        inscricoes = Inscricao.objects.all().values('modalidade__nome').annotate(
-            total=Count('modalidade__nome')).order_by('total', 'modalidade__nome')
+        inscricoes = Inscricao.objects.all()\
+            .values('edicao_prova__edicao_modalidade__modalidade__nome')\
+            .annotate(total=Count('edicao_prova__edicao_modalidade__modalidade__nome'))\
+            .order_by('total', 'edicao_prova__edicao_modalidade__modalidade__nome')
 
         for inscricao in inscricoes:
             dados.append(inscricao['total'])
