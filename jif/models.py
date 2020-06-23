@@ -177,7 +177,7 @@ class EdicaoModalidade(Base):
         verbose_name_plural = 'Modalidades da Edição'
 
     def __str__(self):
-        return f"{self.edicao} {self.modalidade} {self.genero}"
+        return f"{self.modalidade} {'Masculino' if self.genero == 'M' else 'Femenino'} - {self.edicao}"
 
     def get_verbose_name(self):
         return self._meta.verbose_name
@@ -217,7 +217,7 @@ class EdicaoModalidadeProva(Base):
         verbose_name_plural = 'Provas da Modalidade'
 
     def __str__(self):
-        return f"{self.edicao_modalidade} {self.prova}"
+        return f"{self.prova} - {self.edicao_modalidade}"
 
     def get_verbose_name(self):
         return self._meta.verbose_name
