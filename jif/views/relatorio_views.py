@@ -23,10 +23,10 @@ def atleta_campus(request):
         if form.is_valid():
             if form.cleaned_data['instituto']:
                 instituto_id = form.cleaned_data['instituto'].pk
-                inscricoes = Inscricao.objects.filter(instituto__pk=instituto_id).order_by('atleta__nome')
+                inscricoes = Inscricao.objects.filter(campus__instituto__pk=instituto_id).order_by('atleta__nome')
                 mostrar_campus = False
             else:
-                inscricoes = Inscricao.objects.all().order_by('instituto__nome', 'atleta__nome')
+                inscricoes = Inscricao.objects.all().order_by('campus__instituto__nome', 'atleta__nome')
                 mostrar_campus = True
 
             return render(request, 'jif/relatorio/atletacampus.html',
