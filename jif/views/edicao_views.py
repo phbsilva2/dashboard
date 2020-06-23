@@ -254,7 +254,7 @@ class EdicaoModalidadeProvaUpdateView(PermissionRequiredMixin, SuccessMessageMix
               "limite_participante_individual", "ativo"]
     permission_required = 'jif.change_edicao'
     template_name = 'jif/edicao/prova/form.html'
-    context_object_name = 'edicaomodalidadeprova'
+    context_object_name = 'edicao_modalidade_prova'
     success_message = "A prova '%(prova)s' foi alterada com sucesso!"
 
     def get_success_url(self, **kwargs):
@@ -269,3 +269,27 @@ class EdicaoModalidadeProvaUpdateView(PermissionRequiredMixin, SuccessMessageMix
             .filter(edicao_modalidade__id=edicao_modalidade_id) \
             .order_by('edicao_modalidade__modalidade__nome', 'prova__nome')
         return context
+
+
+class EdicaoModalidadeProvaDeleteView(PermissionRequiredMixin, DeleteView):
+    model = EdicaoModalidadeProva
+    permission_required = 'jif.delete_edicao'
+    template_name = 'jif/edicao/prova/confirm_delete.html'
+    context_object_name = 'edicao_modalidade_prova'
+
+    def get_success_url(self, **kwargs):
+        edicao_modalidade_id = self.object.edicao_modalidade.id
+        return f'/edicao/modalidade/{edicao_modalidade_id}/update'
+
+    def get_context_data(self, **kwargs):
+        edicao_modalidade_id = self.object.edicao_modalidade.id
+        context = super(EdicaoModalidadeProvaDeleteView, self).get_context_data(**kwargs)
+        context['edicao_modalidade_id'] = edicao_modalidade_id
+        context['provas_edicao'] = EdicaoModalidadeProva.objects \
+            .filter(edicao_modalidade__id=edicao_modalidade_id) \
+            .order_by('edicao_modalidade__modalidade__nome', 'prova__nome')
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, f"A prova '{self.get_object()}' foi excluída com sucesso!")
+        return super(EdicaoModalidadeProvaDeleteView, self).delete(request, *args, **kwargs)
