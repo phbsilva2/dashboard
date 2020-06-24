@@ -109,6 +109,26 @@ class EdicaoEtapaCreateView(PermissionRequiredMixin, SuccessMessageMixin, Create
             return self.render_to_response(self.get_context_data(form=form))
 
 
+class EdicaoEtapaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Etapa
+    fields = ["nome", "data_inicio_etapa", "data_termino_etapa", "data_inicio_inscricao",
+              "data_termino_inscricao", "campi", "ativo"]
+    permission_required = 'jif.change_etapa'
+    template_name = 'jif/edicao/etapa/form.html'
+    context_object_name = 'etapa'
+    success_message = "A etapa '%(nome)s' foi alterada com sucesso!"
+
+    def get_success_url(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        return f'/edicao/{edicao_id}/update'
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        context = super(EdicaoEtapaUpdateView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
+
+
 class EdicaoCategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = EdicaoCategoria
     fields = ["categoria", "regras"]
