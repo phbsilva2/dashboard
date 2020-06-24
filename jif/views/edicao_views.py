@@ -129,6 +129,27 @@ class EdicaoEtapaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, Update
         return context
 
 
+class EdicaoEtapaDeleteView(PermissionRequiredMixin, DeleteView):
+    model = Etapa
+    permission_required = 'jif.delete_etapa'
+    template_name = 'jif/edicao/etapa/confirm_delete.html'
+    context_object_name = 'etapa'
+
+    def get_success_url(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        return f'/edicao/{edicao_id}/update'
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.object.edicao.id
+        context = super(EdicaoEtapaDeleteView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, f"A etapa '{self.get_object()}' foi excluída com sucesso!")
+        return super(EdicaoEtapaDeleteView, self).delete(request, *args, **kwargs)
+
+
 class EdicaoCategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = EdicaoCategoria
     fields = ["categoria", "regras"]
