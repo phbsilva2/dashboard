@@ -99,7 +99,8 @@ def inscricoes_atletas(request):
             instituto_id = form.cleaned_data['instituto'].pk
             modalidade_id = form.cleaned_data['modalidade'].pk
 
-            inscricoes = Inscricao.objects.filter(instituto__pk=instituto_id, modalidade__pk=modalidade_id)
+            inscricoes = Inscricao.objects.filter(campus__instituto__pk=instituto_id,
+                                                  edicao_prova__edicao_modalidade__modalidade__pk=modalidade_id)
 
             return render(request, 'jif/relatorio/inscricoesatletas.html',
                           {'form': form,
@@ -120,7 +121,8 @@ def fichaisncricao(request, uo_id, modalidade_id):
     uo_nome = ""
     modalidade_nome = ""
 
-    inscricoes = Inscricao.objects.filter(instituto__pk=uo_id, modalidade__pk=modalidade_id)
+    inscricoes = Inscricao.objects.filter(campus__instituto__pk=uo_id,
+                                          edicao_prova__edicao_modalidade__modalidade__pk=modalidade_id)
     if inscricoes:
         for inscr in inscricoes:
             dados_inscrito = []
@@ -132,9 +134,9 @@ def fichaisncricao(request, uo_id, modalidade_id):
             dados_inscrito.append(str(inscr.atleta.rg))
             dados_inscrito.append(str(inscr.atleta.matricula))
             if not uo_nome:
-                uo_nome = inscr.instituto.nome
+                uo_nome = inscr.campus.instituto.nome
             if not modalidade_nome:
-                modalidade_nome = inscr.modalidade.nome
+                modalidade_nome = inscr.edicao_prova.edicao_modalidade.modalidade.nome
 
             dados_inscritos.append(dados_inscrito)
 
