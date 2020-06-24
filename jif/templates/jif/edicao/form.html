@@ -40,6 +40,74 @@
             </form>
         </div>
         {% if edicao %}
+        <!-- Etapas da Edição-->
+        <div class="card-header">
+            Etapas da Edição
+            <div class="box-tools pull-right">
+                {% if perms.jif.add_etapa %}
+                <a href="/edicao/etapa/create/{{edicao.id}}/"
+                   class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar Etapa da Edição
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:70px"></th>
+                        <th>Nome</th>
+                        <th>Início da Etapa</th>
+                        <th>Término da Etapa</th>
+                        <th>Início das Inscrições</th>
+                        <th>Término das Inscrições</th>
+                        <th>Ativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in etapas_edicao %}
+                    <tr>
+                        <td style="width:70px">
+                            {% if perms.jif.change_etapa %}
+                            <a href="/edicao/etapa/{{item.id}}/update" title="Editar">
+                                <i class="fa fa-edit text-warning mr-1"></i>
+                            </a>
+                            {% endif %}
+                            {% if perms.jif.delete_etapa %}
+                            <a href="/edicao/etapa/{{item.id}}/delete" title="Excluir" class="delete-btn">
+                                <i class="fa fa-trash text-danger"></i>
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{item.nome}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_inicio_etapa}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_termino_etapa}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_inicio_inscricao}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_termino_inscricao}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <!-- Categorias da Edição-->
         <div class="card-header">
             Categorias da Edição
@@ -68,10 +136,14 @@
                     <tr>
                         <td>
                             {% if perms.jif.change_edicao %}
-                            <a href="/edicao/categoria/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
+                            <a href="/edicao/categoria/{{item.id}}/update" title="Editar">
+                                <i class="fa fa-edit text-warning mr-1"></i>
+                            </a>
                             {% endif %}
                             {% if perms.jif.delete_edicao %}
-                            <a href="/edicao/categoria/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
+                            <a href="/edicao/categoria/{{item.id}}/delete" title="Excluir" class="delete-btn">
+                                <i class="fa fa-trash text-danger"></i>
+                            </a>
                             {% endif %}
                         </td>
                         <td>
@@ -120,10 +192,14 @@
                     <tr>
                         <td>
                             {% if perms.jif.change_edicao %}
-                            <a href="/edicao/modalidade/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
+                            <a href="/edicao/modalidade/{{item.id}}/update" title="Editar">
+                                <i class="fa fa-edit text-warning mr-1"></i>
+                            </a>
                             {% endif %}
                             {% if perms.jif.delete_edicao %}
-                            <a href="/edicao/modalidade/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
+                            <a href="/edicao/modalidade/{{item.id}}/delete" title="Excluir" class="delete-btn">
+                                <i class="fa fa-trash text-danger"></i>
+                            </a>
                             {% endif %}
                         </td>
                         <td>
