@@ -79,6 +79,36 @@ class EdicaoDeleteView(PermissionRequiredMixin, DeleteView):
         return super(EdicaoDeleteView, self).delete(request, *args, **kwargs)
 
 
+class EdicaoEtapaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Etapa
+    fields = ["nome", "data_inicio_etapa", "data_termino_etapa", "data_inicio_inscricao",
+              "data_termino_inscricao", "campi"]
+    permission_required = 'jif.add_etapa'
+    template_name = 'jif/edicao/etapa/form.html'
+    success_message = "A etapa '%(etapa)s' foi adicionada com sucesso!"
+
+    def get_context_data(self, **kwargs):
+        edicao_id = self.kwargs['pk']
+        context = super(EdicaoEtapaCreateView, self).get_context_data(**kwargs)
+        context['edicao_id'] = edicao_id
+        return context
+
+    def form_valid(self, form):
+        edicao_id = self.kwargs['pk']
+        obj = form.save(commit=False)
+        obj.edicao = Edicao.objects.get(pk=edicao_id)
+        try:
+            obj.save()
+            return HttpResponseRedirect(f'/edicao/{edicao_id}/update')
+            # return super(EdicaoCategoriaCreateView, self).form_valid(form)
+        except IntegrityError:
+            messages.error(self.request, 'Essa Etapa já foi cadastrada na Edição.')
+            return self.render_to_response(self.get_context_data(form=form))
+        except Exception as e:
+            messages.error(self.request, e)
+            return self.render_to_response(self.get_context_data(form=form))
+
+
 class EdicaoCategoriaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = EdicaoCategoria
     fields = ["categoria", "regras"]
