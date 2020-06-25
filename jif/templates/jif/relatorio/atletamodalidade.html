@@ -37,6 +37,7 @@
                         <th><div class="text">Nome do Atleta</div></th>
                         <th><div class="text">Matrícula</div></th>
                         <th><div class="text">Campus</div></th>
+                        <th><div class="text">Prova</div></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +56,10 @@
                         </td>
                         <td>
                             <span>{{inscricao.campus.nome}}</span>
-                         </td>
+                        </td>
+                        <td>
+                            <span>{{inscricao.edicao_prova.prova}}</span>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
