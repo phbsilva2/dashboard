@@ -33,20 +33,6 @@
                 </a>
             </li>
             {% endif %}
-            {% if perms.jif.view_edicao %}
-            <li class="nav-item">
-                <a href="{% url 'edicao' %}" class="nav-link">
-                    <p>Edições</p>
-                </a>
-            </li>
-            {% endif %}
-            {% if perms.jif.view_etapa %}
-            <li class="nav-item">
-                <a href="{% url 'etapa' %}" class="nav-link">
-                    <p>Etapas</p>
-                </a>
-            </li>
-            {% endif %}
             {% if perms.jif.view_categoria %}
             <li class="nav-item">
                 <a href="{% url 'categoria' %}" class="nav-link">
@@ -65,6 +51,13 @@
             <li class="nav-item">
                 <a href="{% url 'prova' %}" class="nav-link">
                     <p>Provas</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_edicao %}
+            <li class="nav-item">
+                <a href="{% url 'edicao' %}" class="nav-link">
+                    <p>Edições</p>
                 </a>
             </li>
             {% endif %}
