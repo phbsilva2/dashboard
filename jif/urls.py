@@ -172,7 +172,7 @@ urlpatterns = [
     path('atletamodalidade/', relatorio_views.atleta_modalidade, name='atleta_modalidade'),
     path('atletaprova/', relatorio_views.atleta_prova, name='atleta_prova'),
     path('inscricoesatletas/', relatorio_views.inscricoes_atletas, name='inscricoes_atletas'),
-    path('fichainscricao/<int:uo_id>/<int:modalidade_id>', relatorio_views.fichaisncricao, name='ficha_inscricao'),
+    path('fichainscricao/<int:edicao_id>/<int:campus_id>', relatorio_views.fichaisncricao, name='ficha_inscricao'),
     # Gráfico URLs
     path('grafico/', GraficoView.as_view(), name='grafico'),
     path('dadosinscricaocampus/', InscricaoCampusJSONView.as_view(), name='dados_inscricao_campus'),

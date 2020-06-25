@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import (
-    Instituto,
+    Edicao,
     Campus,
     Modalidade,
     Prova
@@ -21,5 +21,5 @@ class RelatorioAtletasProvaForm(forms.Form):
 
 
 class RelatorioInscricoesForm(forms.Form):
-    instituto = forms.ModelChoiceField(Instituto.objects.all().order_by('nome'))
-    modalidade = forms.ModelChoiceField(Modalidade.objects.all().order_by('nome'))
+    edicao = forms.ModelChoiceField(Edicao.objects.all().order_by('nome'))
+    campus = forms.ModelChoiceField(Campus.objects.all().order_by('nome'))
