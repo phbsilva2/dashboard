@@ -74,7 +74,7 @@ def inscricao_pdf(instituto_nome, campus_nome, edicao_nome, inscricoes=[]):
     elems = []
     elems.append(imagem)
     elems.append(Spacer(1, 0.3 * inch))
-    elems.append(Paragraph("<para alignment='center'><h1><b>JOGOS DO INSTITUTO FEDERAL</b></h1></para>", styles["Normal"]))
+    elems.append(Paragraph("<para alignment='center'><h1><b>JOGOS DOS INSTITUTOS FEDERAIS</b></h1></para>", styles["Normal"]))
     elems.append(Spacer(1, 0.1 * inch))
     elems.append(Paragraph(f"<para alignment='center'><h1><b>{edicao_nome}</b></h1></para>", styles["Normal"]))
     elems.append(Spacer(1, 0.2 * inch))
