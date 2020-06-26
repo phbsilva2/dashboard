@@ -110,13 +110,13 @@
         </div>
         <!-- Categorias da Edição-->
         <div class="card-header">
-            Categorias da Edição
+            Categorias Etárias da Edição
             <div class="box-tools pull-right">
                 {% if perms.jif.change_edicao %}
                 <a href="/edicao/categoria/create/{{edicao.id}}/"
                    class="btn btn-primary btn-sm">
                     <i class="fa fa-plus"></i>
-                    Adicionar Categoria da Edição
+                    Adicionar Categoria Etária da Edição
                 </a>
                 {% endif %}
             </div>
@@ -184,6 +184,7 @@
                         <th style="width:70px"></th>
                         <th>Modalidade</th>
                         <th>Gênero</th>
+                        <th>Limite de Participantes</th>
                         <th>Ativo</th>
                     </tr>
                 </thead>
@@ -207,6 +208,9 @@
                         </td>
                         <td>
                             <span>{{item.get_genero_display}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.limite_participantes_modalidade}}</span>
                         </td>
                         <td>
                             {% if item.ativo %}

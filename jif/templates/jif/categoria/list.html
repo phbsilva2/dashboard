@@ -54,10 +54,10 @@
                             <span>{{item.nome}}</span>
                         </td>
                         <td>
-                            <span>{{item.idade_minima}}</span>
+                            <span>{{item.idade_minima|default_if_none:''}}</span>
                         </td>
                         <td>
-                            <span>{{item.idade_maxima}}</span>
+                            <span>{{item.idade_maxima|default_if_none:''}}</span>
                         </td>
                         <td>
                             {% if item.ativo %}

@@ -9,7 +9,7 @@
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
         <li class="breadcrumb-item"><a href="{% url 'edicao' %}">Edição</a></li>
-        <li class="breadcrumb-item active">Excluir Categoria da Edição</li>
+        <li class="breadcrumb-item active">Excluir {{edicao_categoria.get_verbose_name}}</li>
     </ol>
 {% endblock %}
 

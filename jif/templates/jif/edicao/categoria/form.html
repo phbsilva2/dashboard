@@ -10,9 +10,9 @@
         <li class="breadcrumb-item">Cadastros</li>
         <li class="breadcrumb-item"><a href="{% url 'edicao' %}">Edição</a></li>
         {% if edicaocategoria %}
-        <li class="breadcrumb-item">Editar Categoria da Edição</li>
+        <li class="breadcrumb-item">Editar {{edicaocategoria.get_verbose_name}}</li>
         {% else %}
-        <li class="breadcrumb-item active">Adicionar Categoria da Edição</li>
+        <li class="breadcrumb-item active">Adicionar Categoria Etária da Edição</li>
         {% endif %}
     </ol>
 {% endblock %}
@@ -23,7 +23,7 @@
             {% if edicaocategoria %}
             Editar {{edicaocategoria.get_verbose_name}}
             {% else %}
-            Categoria da Edição
+            Adicionar Categoria da Edição
             {% endif %}
         </div>
         <div class="card-body">
