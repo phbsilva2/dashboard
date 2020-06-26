@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+	{% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item"><a href="{% url 'edicao' %}">Edições</a></li>
+        {% if edicao %}
+        <li class="breadcrumb-item active">Editar</li>
+        {% else %}
+        <li class="breadcrumb-item active">Adicionar</li>
+        {% endif %}
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            {% if edicao %}
+            Editar {{edicao.get_verbose_name}}
+            {% else %}
+            Edição
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% if edicao %}
+                <p>Você está editando '{{ edicao.nome }}' </p>
+                {% endif %}
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="box-tools pull-left">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Salvar">
+                    <a href="{% url 'edicao' %}" class="btn btn-primary btn-sm">Cancelar</a>
+                </div>
+            </form>
+        </div>
+        {% if edicao %}
+        <!-- Etapas da Edição-->
+        <div class="card-header">
+            Etapas da Edição
+            <div class="box-tools pull-right">
+                {% if perms.jif.add_etapa %}
+                <a href="/edicao/etapa/create/{{edicao.id}}/"
+                   class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar Etapa da Edição
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:70px"></th>
+                        <th>Nome</th>
+                        <th>Início da Etapa</th>
+                        <th>Término da Etapa</th>
+                        <th>Início das Inscrições</th>
+                        <th>Término das Inscrições</th>
+                        <th>Ativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in etapas_edicao %}
+                    <tr>
+                        <td style="width:70px">
+                            {% if perms.jif.change_etapa %}
+                            <a href="/edicao/etapa/{{item.id}}/update" title="Editar">
+                                <i class="fa fa-edit text-warning mr-1"></i>
+                            </a>
+                            {% endif %}
+                            {% if perms.jif.delete_etapa %}
+                            <a href="/edicao/etapa/{{item.id}}/delete" title="Excluir" class="delete-btn">
+                                <i class="fa fa-trash text-danger"></i>
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{item.nome}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_inicio_etapa}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_termino_etapa}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_inicio_inscricao}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.data_termino_inscricao}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Categorias da Edição-->
+        <div class="card-header">
+            Categorias Etárias da Edição
+            <div class="box-tools pull-right">
+                {% if perms.jif.change_edicao %}
+                <a href="/edicao/categoria/create/{{edicao.id}}/"
+                   class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar Categoria Etária da Edição
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:70px"></th>
+                        <th>Categoria</th>
+                        <th>Regras</th>
+                        <th>Ativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in categorias_edicao %}
+                    <tr>
+                        <td>
+                            {% if perms.jif.change_edicao %}
+                            <a href="/edicao/categoria/{{item.id}}/update" title="Editar">
+                                <i class="fa fa-edit text-warning mr-1"></i>
+                            </a>
+                            {% endif %}
+                            {% if perms.jif.delete_edicao %}
+                            <a href="/edicao/categoria/{{item.id}}/delete" title="Excluir" class="delete-btn">
+                                <i class="fa fa-trash text-danger"></i>
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{item.categoria}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.regras}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Modalidades da Edição-->
+        <div class="card-header">
+            Modalidades da Edição
+            <div class="box-tools pull-right">
+                {% if perms.jif.change_edicao %}
+                <a href="/edicao/modalidade/create/{{edicao.id}}/"
+                   class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar Modalidade da Edição
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:70px"></th>
+                        <th>Modalidade</th>
+                        <th>Gênero</th>
+                        <th>Limite de Participantes</th>
+                        <th>Ativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in modalidades_edicao %}
+                    <tr>
+                        <td>
+                            {% if perms.jif.change_edicao %}
+                            <a href="/edicao/modalidade/{{item.id}}/update" title="Editar">
+                                <i class="fa fa-edit text-warning mr-1"></i>
+                            </a>
+                            {% endif %}
+                            {% if perms.jif.delete_edicao %}
+                            <a href="/edicao/modalidade/{{item.id}}/delete" title="Excluir" class="delete-btn">
+                                <i class="fa fa-trash text-danger"></i>
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{item.modalidade}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.get_genero_display}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.limite_participantes_modalidade}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

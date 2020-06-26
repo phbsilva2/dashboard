@@ -19,24 +19,45 @@
             </p>
         </a>
         <ul class="nav nav-treeview">
-            {% if perms.jif.view_unidadeorganizacional %}
+            {% if perms.jif.view_instituto %}
             <li class="nav-item">
-                <a href="{% url 'unidade_organizacional_list' %}" class="nav-link">
-                    <p>Unidades Organizacionais</p>
+                <a href="{% url 'instituto' %}" class="nav-link">
+                    <p>Institutos</p>
                 </a>
             </li>
             {% endif %}
-            {% if perms.jif.view_tipomodalidade %}
+            {% if perms.jif.view_campus %}
             <li class="nav-item">
-                <a href="{% url 'tipo_modalidade_list' %}" class="nav-link"><p>
-                    Tipos de Modalidades</p>
+                <a href="{% url 'campus' %}" class="nav-link">
+                    <p>Campi</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_categoria %}
+            <li class="nav-item">
+                <a href="{% url 'categoria' %}" class="nav-link">
+                    <p>Categorias</p>
                 </a>
             </li>
             {% endif %}
             {% if perms.jif.view_modalidade %}
             <li class="nav-item">
-                <a href="{% url 'modalidade_list' %}" class="nav-link">
+                <a href="{% url 'modalidade' %}" class="nav-link">
                     <p>Modalidades</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_prova %}
+            <li class="nav-item">
+                <a href="{% url 'prova' %}" class="nav-link">
+                    <p>Provas</p>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.jif.view_edicao %}
+            <li class="nav-item">
+                <a href="{% url 'edicao' %}" class="nav-link">
+                    <p>Edições</p>
                 </a>
             </li>
             {% endif %}
@@ -49,7 +70,7 @@
             {% endif %}
             {% if perms.jif.view_inscricao %}
             <li class="nav-item">
-                <a href="{% url 'inscricao_list' %}" class="nav-link">
+                <a href="{% url 'inscricao' %}" class="nav-link">
                     <p>Inscrições</p>
                 </a>
             </li>
@@ -87,8 +108,8 @@
             {% endif %}
             {% if perms.jif.view_atleta %}
             <li class="nav-item">
-                <a href="{% url 'atleta_tipo_modalidade' %}" class="nav-link">
-                    <p>Atletas por Tipo de Modalidades</p>
+                <a href="{% url 'atleta_prova' %}" class="nav-link">
+                    <p>Atletas por Prova</p>
                 </a>
             </li>
             {% endif %}

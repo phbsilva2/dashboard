@@ -10,12 +10,11 @@ import io
 import os.path
 
 
-def inscricao_pdf(unidade_organizacional_nome, modalidade_nome, inscricoes=[]):
+def inscricao_pdf(instituto_nome, campus_nome, edicao_nome, inscricoes=[]):
 
-    cabecalho = ['Nome do Atleta', 'Data Nasc.', 'RG', 'Matrícula']
+    cabecalho = ['Atleta', 'Data Nasc.', 'RG', 'Matrícula', 'Prova(s) Inscrita(s)']
 
     qtd_atletas = len(inscricoes)
-    inscricoes.sort()
 
     inscricoes.insert(0, cabecalho)
 
@@ -27,7 +26,7 @@ def inscricao_pdf(unidade_organizacional_nome, modalidade_nome, inscricoes=[]):
 
     # Adicionar estilo
     style = TableStyle([
-        ('BACKGROUND', (0, 0), (3, 0), colors.gray),
+        ('BACKGROUND', (0, 0), (4, 0), colors.gray),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         # ('FONTNAME', (0, 0), (-1, 0), 'Courier'),
@@ -46,7 +45,8 @@ def inscricao_pdf(unidade_organizacional_nome, modalidade_nome, inscricoes=[]):
 
         ts = TableStyle(
             [('BACKGROUND', (0, i), (-1, i), bc),
-             ('ALIGN', (0, 1), (-1, -1), 'LEFT')]
+             ('ALIGN', (0, 1), (-1, -1), 'LEFT'),
+             ('VALIGN', (0, 1), (-1, -1), 'MIDDLE')]
         )
         table.setStyle(ts)
 
@@ -65,29 +65,30 @@ def inscricao_pdf(unidade_organizacional_nome, modalidade_nome, inscricoes=[]):
     static_files_path = getattr(settings, 'STATIC_ROOT', None)
     if getattr(settings, 'DEBUG', None):
         static_files_path = str.replace(static_files_path, 'staticfiles', 'static')
-    logo_dir = static_files_path + '\imagens\logo_ifb.png'
+    logo_dir = static_files_path + '\imagens\jif.png'
     if os.path.isfile(logo_dir):
-        imagem = Image(logo_dir, 1.2 * inch, 1 * inch)
+        imagem = Image(logo_dir, 0.8 * inch, 0.6 * inch)
     else:
         imagem = None
 
     elems = []
     elems.append(imagem)
     elems.append(Spacer(1, 0.3 * inch))
-    elems.append(Paragraph("<para alignment='center'><h1><b>JOGOS DO INSTITUTO FEDERAL</b></h1></para>", styles["Normal"]))
-    elems.append(Spacer(1, 0.3 * inch))
-    elems.append(Paragraph('IFB - Instituto Federal de Educação, Ciência e Tecnologia de Brasília', styles["Normal"]))
+    elems.append(Paragraph("<para alignment='center'><h1><b>JOGOS DOS INSTITUTOS FEDERAIS</b></h1></para>", styles["Normal"]))
+    elems.append(Spacer(1, 0.1 * inch))
+    elems.append(Paragraph(f"<para alignment='center'><h1><b>{edicao_nome}</b></h1></para>", styles["Normal"]))
     elems.append(Spacer(1, 0.2 * inch))
-    elems.append(Paragraph("<h2>Unidade Organizacional: <b>%s</b></h2>" % (unidade_organizacional_nome), normal))
-    elems.append(Paragraph("<h2>Modalidade: <b>%s</b></h2>" % (modalidade_nome), normal))
+    elems.append(Paragraph(f"<b>{instituto_nome}</b>", styles["Normal"]))
+    elems.append(Paragraph(f"<h2>Campus: <b>{campus_nome}</b></h2>", normal))
     elems.append(Spacer(1, 0.2 * inch))
+
     elems.append(table)
 
     elems.append(Spacer(1, 0.2 * inch))
     elems.append(Paragraph(f'Número Total de Atletas: {qtd_atletas}', styles["Normal"]))
 
     texto = '<p align=”justify”><font size="10">Declaro que os atletas aqui relacionados estão ' \
-            'regularmente matriculados e frequentando aulas em nossa instituição de ensino:</font></p>'
+            'regularmente matriculados e frequentando aulas em nossa instituição de ensino.</font></p>'
 
     elems.append(Spacer(1, 0.2 * inch))
     elems.append(Paragraph(texto, styles["Normal"]))

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block body %}
 <body class="bg-gradient-dark">
     <div class="container">
@@ -7,6 +7,8 @@
             <div class="col-xl-4 col-sm-6">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-header text-center text-dark">
+                        <img width="80" height="60" src="{% static '/imagens/jif.png' %}"
+                             alt="Logo JIF" style="opacity: .8">
                         <h2>Sistema JIF</h2>
                     </div>
                     <div class="card-body">

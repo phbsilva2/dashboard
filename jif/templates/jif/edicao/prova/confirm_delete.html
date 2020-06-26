@@ -8,23 +8,23 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'unidade_organizacional_list' %}">{{unidade_organizacional.get_verbose_name}}</a></li>
-        <li class="breadcrumb-item active">Excluir</li>
+        <li class="breadcrumb-item"><a href="{% url 'edicao' %}">Edição</a></li>
+        <li class="breadcrumb-item active">Excluir Prova da Modalidade</li>
     </ol>
 {% endblock %}
 
 {% block content %}
     <div class="card mb-3">
         <div class="card-header">
-            Excluir {{unidade_organizacional.get_verbose_name}}
+            Excluir {{edicao_modalidade_prova.get_verbose_name}}
         </div>
          <div class="card-body">
             <form method="post">
                 {% csrf_token %}
-                <p>Você tem certeza que deseja excluir '{{ unidade_organizacional.nome }}' ?</p>
+                <p>Você tem certeza que deseja excluir '{{ edicao_modalidade_prova }}' ?</p>
                 <div class="box-tools pull-left">
                     <input type="submit" class="btn btn-danger btn-sm" value="Excluir">
-                    <a href="{% url 'unidade_organizacional_list' %}" class="btn btn-primary btn-sm">Cancelar</a>
+                    <a href="/edicao/modalidade/{{edicao_modalidade_id}}/update" class="btn btn-primary btn-sm">Cancelar</a>
                 </div>
             </form>
          </div>

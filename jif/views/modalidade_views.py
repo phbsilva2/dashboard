@@ -30,7 +30,7 @@ class ModalidadeDetailView(PermissionRequiredMixin, DetailView):
 
 class ModalidadeCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Modalidade
-    fields = ["nome", "sigla", "tipo_modalidade", "tipo",  "lotacao_permitida"]
+    fields = ["nome", "tipo"]
     permission_required = 'jif.add_modalidade'
     template_name = 'jif/modalidade/form.html'
     success_message = "'%(nome)s' foi adicionado com sucesso!"
@@ -39,7 +39,7 @@ class ModalidadeCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateV
 
 class ModalidadeUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Modalidade
-    fields = ["nome", "sigla", "tipo_modalidade", "tipo",  "lotacao_permitida"]
+    fields = ["nome", "tipo"]
     permission_required = 'jif.change_modalidade'
     template_name = 'jif/modalidade/form.html'
     context_object_name = 'modalidade'

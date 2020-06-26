@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
         <li class="breadcrumb-item">Cadastros</li>
-        <li class="breadcrumb-item"><a href="{% url 'atleta_list' %}">{{atleta.get_verbose_name}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'atleta_list' %}">{{atleta.get_verbose_name_plural}}</a></li>
         <li class="breadcrumb-item active">Excluir</li>
     </ol>
 {% endblock %}

@@ -36,7 +36,7 @@
                             <th><div class="text">Nome do Atleta</div></th>
                             <th><div class="text">Matrícula</div></th>
                             <th><div class="text">Modaliade</div></th>
-                            <th><div class="text">Tipo Modalidade</div></th>
+                            <th><div class="text">Prova</div></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +44,7 @@
                         <tr class="row1">
                             {% if mostrar_campus %}
                             <td>
-                                <span>{{inscricao.unidade_organizacional.nome}}</span>
+                                <span>{{inscricao.campus.nome}}</span>
                             </td>
                             {% endif %}
                             <td>
@@ -54,10 +54,10 @@
                                 <span>{{inscricao.atleta.matricula}}</span>
                             </td>
                             <td>
-                                <span>{{inscricao.modalidade.nome}}</span>
+                                <span>{{inscricao.edicao_prova.edicao_modalidade}}</span>
                              </td>
                             <td>
-                                <span>{{inscricao.modalidade.tipo_modalidade.titulo}}</span>
+                                <span>{{inscricao.edicao_prova.prova.nome}}</span>
                              </td>
                         </tr>
                         {% endfor %}

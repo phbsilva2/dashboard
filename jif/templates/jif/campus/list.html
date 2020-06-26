@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block nav_sidebar %}
+    {% include 'jif/menu.html' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Início</a></li>
+        <li class="breadcrumb-item">Cadastros</li>
+        <li class="breadcrumb-item active">{{campus.get_verbose_name_plural}}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            {{campus.get_verbose_name_plural}}
+            <div class="box-tools pull-right">
+                {% if perms.jif.add_campus %}
+                <a href="/campus_create/" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Adicionar {{campus.get_verbose_name}}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                        <th>Instituto</th>
+                        <th>Ativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in campi %}
+                    <tr class="row1">
+                        <td style="width:70px">
+                            {% if perms.jif.view_campus %}
+                            <a href="/campus/{{item.id}}" title="Visualizar"><i class="fa fa-eye text-info mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.change_campus %}
+                            <a href="/campus/{{item.id}}/update" title="Editar"><i class="fa fa-edit text-warning mr-1"></i></a>
+                            {% endif %}
+                            {% if perms.jif.delete_campus %}
+                            <a href="/campus/{{item.id}}/delete" title="Excluir" class="delete-btn"><i class="fa fa-trash text-danger"></i></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span>{{item.nome}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.instituto}}</span>
+                        </td>
+                        <td>
+                            {% if item.ativo %}
+                            <i class="fa fa-check text-success" title="Sim"></i>
+                            {% else %}
+                            <i class="fa fa fa-remove text-danger" title="Não"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
