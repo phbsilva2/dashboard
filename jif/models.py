@@ -114,8 +114,8 @@ class Categoria(Base):
     idade_maxima = models.IntegerField('Idade Máxima', blank=True, null=True)
 
     class Meta:
-        verbose_name = 'Categoria'
-        verbose_name_plural = 'Categorias'
+        verbose_name = 'Categoria Etária'
+        verbose_name_plural = 'Categorias Etárias'
 
     def __str__(self):
         return self.nome
@@ -157,7 +157,7 @@ class Modalidade(Base):
         verbose_name_plural = 'Modalidades'
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome} {'Individual' if self.tipo == 'I' else 'Coletivo'}"
 
     def get_verbose_name(self):
         return self._meta.verbose_name
