@@ -148,10 +148,11 @@ class EdicaoCategoria(Base):
 
 
 class Modalidade(Base):
-    nome = models.CharField(max_length=100, unique=True)
+    nome = models.CharField(max_length=100)
     tipo = models.CharField(max_length=1, choices=[['I', 'Individual'], ['C', 'Coletivo']])
 
     class Meta:
+        unique_together = ['nome', 'tipo']
         verbose_name = 'Modalidade'
         verbose_name_plural = 'Modalidades'
 
